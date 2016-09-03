@@ -1,30 +1,18 @@
-import org.w3c.dom.Document;
-import org.xml.sax.ErrorHandler;
+import dbl.Item;
+import dbl.SaxHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-import org.w3c.dom.*;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
-import javax.xml.parsers.*;
-import java.io.*;
 
 import javax.servlet.ServletContext;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.InputSource;
 
 @WebServlet("/test")
 public class Servlet extends javax.servlet.http.HttpServlet {
@@ -48,7 +36,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
     
     //Set attribute for items
     HttpSession session = request.getSession();
-    session.setAttribute("character", items);
+    session.setAttribute("itemList", items);
     request.getRequestDispatcher("/index.jsp").forward(request, response);
   }
   

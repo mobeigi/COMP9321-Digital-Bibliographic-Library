@@ -1,7 +1,9 @@
+package dbl;
+
 import java.net.URL;
 
 /**
- * Item class which all DLB articles use
+ * dbl.Item class which all DLB articles use
  * Note: Not all items will have values for every attribute
  */
 public class Item {

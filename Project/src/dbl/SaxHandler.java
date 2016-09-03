@@ -1,3 +1,5 @@
+package dbl;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -44,7 +46,7 @@ public class SaxHandler extends DefaultHandler {
                            Attributes attributes) throws SAXException {
     //Check for one of various item types
     switch (qName.toUpperCase()) {
-      //Item types
+      //dbl.Item types
       case "ARTICLE":
         curItem = new Item(Item.ItemTypes.ARTICLE);
         break;
@@ -146,7 +148,7 @@ public class SaxHandler extends DefaultHandler {
     //Handle end of item
     //Add curItem to our item list once we've finished adding all attributes
     switch (qName.toUpperCase()) {
-      //Item types
+      //dbl.Item types
       case "ARTICLE":
       case "INPROCEEDINGS":
       case "PROCEEDINGS":

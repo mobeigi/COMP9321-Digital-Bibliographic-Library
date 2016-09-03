@@ -1,3 +1,8 @@
+<%@ page import="org.omg.CORBA.Request" %>
+<%@ page import="java.lang.reflect.Array" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="dbl.Item" %>
+<%@ page import="java.util.Random" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -5,6 +10,9 @@
 
     <!-- Bootstrap Css -->
     <link href="css/bootstrap/bootstrap-assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Style -->
     <link href="css/bootstrap/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
@@ -103,7 +111,34 @@
         <!-- Random articles -->
         <h4>THESE ARTICLES MAY INTEREST YOU</h4>
         <hr class="sep">
-        <p>Articles here</p>
+
+        <table style="width:100%; margin: 0 auto;">
+        <%
+            ArrayList<Item> items = (ArrayList<Item>) request.getSession().getAttribute("itemList");
+
+            //Generate 10 random items
+            for (int i = 0; i < 10; ++i) {
+              Random rand = new Random();
+              int n = rand.nextInt(items.size()) + 1;
+              Item item = items.get(n);
+              String title = item.getTitle();
+
+              //Shorten long titles
+              if (title.length() > 110) {
+                title = title.substring(0, 110);
+                title += "...";
+              }
+
+              %>
+              <tr>
+                <td style="margin-left: 10px"><i class="fa fa-newspaper-o"></i></td>
+                <td><% out.print(title); %></td>
+              </tr>
+              <%
+            }
+        %>
+
+        </table>
     </div>
 </section>
 
