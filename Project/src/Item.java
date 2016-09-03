@@ -5,6 +5,8 @@ import java.net.URL;
  * Note: Not all items will have values for every attribute
  */
 public class Item {
+  private static int count = 0; //used for auto ID generation per class instance
+  
   //Enums
   public static enum ItemTypes {
     ARTICLE,
@@ -18,16 +20,18 @@ public class Item {
   }
   
   //Fields
+  //We will treat all as strings
+  private int id;
   private ItemTypes type;
   private String author;
   private String editor;
   private String title;
   private String booktitle;
   private String pages;
-  private int year;
+  private String year;
   private String address;
   private String journal;
-  private int volume;
+  private String volume;
   private String number;
   private String month;
   private String url;
@@ -45,17 +49,28 @@ public class Item {
   /**
    * Default constructor
    */
-  public Item() {}
+  public Item() { count += 1; this.id = count; }
   
   /**
    * Constructor specifying items type
    * @param type the type of item
    */
   public Item(ItemTypes type) {
+    count += 1;
+    this.id = count;
+    
     this.type = type;
   }
   
   //Getters and Setters
+  public int getId() {
+    return id;
+  }
+  
+  public void setId(int id) {
+    this.id = id;
+  }
+  
   public ItemTypes getType() {
     return type;
   }
@@ -104,11 +119,11 @@ public class Item {
     this.pages = pages;
   }
   
-  public int getYear() {
+  public String getYear() {
     return year;
   }
   
-  public void setYear(int year) {
+  public void setYear(String year) {
     this.year = year;
   }
   
@@ -128,11 +143,11 @@ public class Item {
     this.journal = journal;
   }
   
-  public int getVolume() {
+  public String getVolume() {
     return volume;
   }
   
-  public void setVolume(int volume) {
+  public void setVolume(String volume) {
     this.volume = volume;
   }
   
