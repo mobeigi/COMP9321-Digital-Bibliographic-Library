@@ -4,6 +4,11 @@
 <%@ page import="dbl.Item" %>
 <%@ page import="java.util.Random" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%-- Set page and invoke servlet --%>
+<% request.getSession().setAttribute("page", "index"); %>
+<jsp:include page="/servlet" />
+
 <html>
 <head>
     <title>DBL+ (Digital Bibliographic Library)</title>
