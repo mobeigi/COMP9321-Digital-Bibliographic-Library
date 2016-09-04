@@ -79,7 +79,7 @@
       %>
       <tr>
         <td class="firstcol"><strong>Type</strong></td>
-        <td><% out.print(item.getType().name()); %></td>
+        <td><% out.print(item.getType()); %></td>
       </tr>
       <%
         }

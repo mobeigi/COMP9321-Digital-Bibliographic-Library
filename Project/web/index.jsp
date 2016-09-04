@@ -54,7 +54,30 @@
         <!-- Simple Search -->
         <h4>SEARCH OUR DATABASE</h4>
         <hr class="sep">
-        <p>Search stuff</p>
+        <div class="searchbox">
+        <form action="results.jsp" method="get">
+          <input type="text" name="title" placeholder="Publication Title" />
+          <br />
+          <input type="text" name="author" placeholder="Author" id="author"/>
+          <input type="text" name="year" maxlength="4" placeholder="Publication Year" id="year" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+          <br />
+          <input type="text" name="venue" placeholder="Venue"/>
+          <br />
+          <select name="type" multiple id="type" size="9" title="Control click to select multiple options">
+            <option disabled="disabled" style="font-weight: bold;">Publication Type:</option>
+            <option value="<% out.print(Item.ItemTypes.ARTICLE); %>">Article (Journal)</option>
+            <option value="<% out.print(Item.ItemTypes.INPROCEEDINGS); %>">Proceedings (Conference)</option>
+            <option value="<% out.print(Item.ItemTypes.PROCEEDINGS); %>">Proceedings (Conference)</option>
+            <option value="<% out.print(Item.ItemTypes.BOOK); %>">Book</option>
+            <option value="<% out.print(Item.ItemTypes.INPROCEEDINGS); %>">Incollection</option>
+            <option value="<% out.print(Item.ItemTypes.PHDTHESIS); %>">PHD Thesis</option>
+            <option value="<% out.print(Item.ItemTypes.MASTERSTHESIS); %>">Masters Thesis</option>
+            <option value="<% out.print(Item.ItemTypes.WWW); %>">Website</option>
+          </select>
+          <br />
+          <input type="submit" />
+        </form>
+        </div>
 
         <br />
         <!-- Random articles -->
