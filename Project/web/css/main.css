@@ -50,6 +50,7 @@ table#itemdetails th,td {
 }
 
 table#itemdetails .firstCol {
+  vertical-align: top;
   padding-right: 20px;
 }
 

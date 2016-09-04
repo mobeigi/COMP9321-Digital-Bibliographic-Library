@@ -41,6 +41,9 @@ public class SaxHandler extends DefaultHandler {
   private boolean b_school;
   private boolean b_chapter;
   
+  //Holds our intermediate attribute data
+  private String tmpAttribute;
+  
   @Override
   public void startElement(String uri, String localName, String qName,
                            Attributes attributes) throws SAXException {
@@ -161,146 +164,104 @@ public class SaxHandler extends DefaultHandler {
         break;
       
       //Attributes
-      //Attributes
       case "AUTHOR":
         b_author = false;
+        curItem.setAuthor(tmpAttribute);
         break;
       case "EDITOR":
         b_editor = false;
+        curItem.setEditor(tmpAttribute);
         break;
       case "TITLE":
         b_title = false;
+        curItem.setTitle(tmpAttribute);
         break;
       case "BOOKTITLE":
         b_booktitle = false;
+        curItem.setBooktitle(tmpAttribute);
         break;
       case "PAGES":
         b_pages = false;
+        curItem.setPages(tmpAttribute);
         break;
       case "YEAR":
         b_year = false;
+        curItem.setYear(tmpAttribute);
         break;
       case "ADDRESS":
         b_address = false;
+        curItem.setAddress(tmpAttribute);
         break;
       case "JOURNAL":
         b_journal = false;
+        curItem.setJournal(tmpAttribute);
         break;
       case "VOLUME":
         b_volume = false;
+        curItem.setVolume(tmpAttribute);
         break;
       case "NUMBER":
         b_number = false;
+        curItem.setNumber(tmpAttribute);
         break;
       case "MONTH":
         b_month = false;
+        curItem.setMonth(tmpAttribute);
         break;
       case "URL":
         b_url = false;
+        curItem.setUrl(tmpAttribute);
         break;
       case "EE":
         b_ee = false;
+        curItem.setEe(tmpAttribute);
         break;
       case "CDROM":
         b_cdrom = false;
+        curItem.setCdrom(tmpAttribute);
         break;
       case "CITE":
         b_cite = false;
+        curItem.setCite(tmpAttribute);
         break;
       case "PUBLISHER":
         b_publisher = false;
+        curItem.setPublisher(tmpAttribute);
         break;
       case "NOTE":
         b_note = false;
+        curItem.setNote(tmpAttribute);
         break;
       case "CROSSREF":
         b_crossref = false;
+        curItem.setCrossref(tmpAttribute);
         break;
       case "ISBN":
         b_isbn = false;
+        curItem.setIsbn(tmpAttribute);
         break;
       case "SERIES":
         b_series = false;
+        curItem.setSeries(tmpAttribute);
         break;
       case "SCHOOL":
         b_school = false;
+        curItem.setSchool(tmpAttribute);
         break;
       case "CHAPTER":
         b_chapter = false;
+        curItem.setChapter(tmpAttribute);
         break;
     }
+    
+    //Reset tmpAttribute
+    tmpAttribute = "";
   }
   
   @Override
   public void characters(char ch[], int start, int length) throws SAXException {
   
     String value = new String(ch, start, length);
-    
-    if(b_author)
-      curItem.setAuthor(((curItem.getAuthor() == null) ? "" : curItem.getAuthor()) + value);
-    
-    if(b_editor)
-      curItem.setEditor(((curItem.getEditor() == null) ? "" : curItem.getEditor()) + value);
-    
-    if(b_title)
-      curItem.setTitle(((curItem.getTitle() == null) ? "" : curItem.getTitle()) + value);
-
-    if(b_booktitle)
-      curItem.setBooktitle(((curItem.getBooktitle() == null) ? "" : curItem.getBooktitle()) + value);
-    
-    if(b_pages)
-      curItem.setPages(((curItem.getPages() == null) ? "" : curItem.getPages()) + value);
-    
-    if(b_year)
-      curItem.setYear(((curItem.getYear() == null) ? "" : curItem.getYear()) + value);
-    
-    if(b_address)
-      curItem.setAddress(((curItem.getAddress() == null) ? "" : curItem.getAddress()) + value);
-    
-    if(b_journal)
-      curItem.setJournal(((curItem.getJournal() == null) ? "" : curItem.getJournal()) + value);
-    
-    if(b_volume)
-      curItem.setVolume(((curItem.getVolume() == null) ? "" : curItem.getVolume()) + value);
-    
-    if(b_number)
-      curItem.setNumber(((curItem.getNumber() == null) ? "" : curItem.getNumber()) + value);
-    
-    if(b_month)
-      curItem.setMonth(((curItem.getMonth() == null) ? "" : curItem.getMonth()) + value);
-    
-    if(b_url)
-      curItem.setUrl(((curItem.getUrl() == null) ? "" : curItem.getUrl()) + value);
-    
-    if(b_ee)
-      curItem.setEe(((curItem.getEe() == null) ? "" : curItem.getEe()) + value);
-    
-    if(b_cdrom)
-      curItem.setCdrom(((curItem.getCdrom() == null) ? "" : curItem.getCdrom()) + value);
-    
-    if(b_cite)
-      curItem.setCite(((curItem.getCite() == null) ? "" : curItem.getCite()) + value);
-    
-    if(b_publisher)
-      curItem.setPublisher(((curItem.getPublisher() == null) ? "" : curItem.getPublisher()) + value);
-    
-    if(b_note)
-      curItem.setNote(((curItem.getNote() == null) ? "" : curItem.getNote()) + value);
-    
-    if(b_crossref)
-      curItem.setCrossref(((curItem.getCrossref() == null) ? "" : curItem.getCrossref()) + value);
-    
-    if(b_isbn)
-      curItem.setIsbn(((curItem.getIsbn() == null) ? "" : curItem.getIsbn()) + value);
-    
-    if(b_series)
-      curItem.setSeries(((curItem.getSeries() == null) ? "" : curItem.getSeries()) + value);
-    
-    if(b_school)
-      curItem.setSchool(((curItem.getSchool() == null) ? "" : curItem.getSchool()) + value);
-    
-    if(b_chapter)
-      curItem.setChapter(((curItem.getChapter() == null) ? "" : curItem.getChapter()) + value);
-    
+    tmpAttribute += value;
   }
 }

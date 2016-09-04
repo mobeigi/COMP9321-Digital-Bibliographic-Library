@@ -58,10 +58,10 @@
         <form action="results.jsp" method="get">
           <input type="text" name="title" placeholder="Publication Title" />
           <br />
-          <input type="text" name="author" placeholder="Author" id="author"/>
+          <input type="text" name="author" placeholder="Author (comma seperated)" id="author"/>
           <input type="text" name="year" maxlength="4" placeholder="Publication Year" id="year" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
           <br />
-          <input type="text" name="venue" placeholder="Venue"/>
+          <input type="text" name="venue" placeholder="Venue (semicolon seperated)"/>
           <br />
           <select name="type" multiple id="type" size="9" title="Control click to select multiple options">
             <option disabled="disabled" style="font-weight: bold;">Publication Type:</option>

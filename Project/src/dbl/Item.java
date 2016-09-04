@@ -1,6 +1,7 @@
 package dbl;
 
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * dbl.Item class which all DLB articles use
@@ -25,8 +26,8 @@ public class Item {
   //We will treat all as strings
   private int id;
   private ItemTypes type;
-  private String author;
-  private String editor;
+  private ArrayList<String> author = new ArrayList<>();  //multiple, no commas in author names
+  private ArrayList<String> editor = new ArrayList<>(); //multiple, no commas in author names
   private String title;
   private String booktitle;
   private String pages;
@@ -36,16 +37,16 @@ public class Item {
   private String volume;
   private String number;
   private String month;
-  private String url;
-  private String ee;
+  private ArrayList<String> url = new ArrayList<>(); //multiple
+  private ArrayList<String> ee = new ArrayList<>(); //multiple
   private String cdrom;
-  private String cite;
+  private ArrayList<String> cite = new ArrayList<>(); //multiple
   private String publisher;
   private String note;
   private String crossref;
-  private String isbn;
+  private ArrayList<String> isbn = new ArrayList<>(); //multiple
   private String series;
-  private String school;
+  private ArrayList<String> school = new ArrayList<>();  //multiple
   private String chapter;
   
   /**
@@ -81,20 +82,31 @@ public class Item {
     this.type = type;
   }
   
-  public String getAuthor() {
-    return author;
+  public ArrayList<String> getAuthor() {
+    return this.author;
+  }
+  
+  public String getAuthorLine() {
+    StringBuilder sb = new StringBuilder();
+    for (String s : this.author)
+    {
+      sb.append(s);
+      sb.append(";");
+    }
+    
+    return sb.toString();
   }
   
   public void setAuthor(String author) {
-    this.author = author;
+    this.author.add(author);
   }
   
-  public String getEditor() {
-    return editor;
+  public ArrayList<String> getEditor() {
+    return this.editor;
   }
   
   public void setEditor(String editor) {
-    this.editor = editor;
+    this.editor.add(editor);
   }
   
   public String getTitle() {
@@ -169,20 +181,20 @@ public class Item {
     this.month = month;
   }
   
-  public String getUrl() {
-    return url;
+  public ArrayList<String> getUrl() {
+    return this.url;
   }
   
   public void setUrl(String url) {
-    this.url = url;
+    this.url.add(url);
   }
   
-  public String getEe() {
-    return ee;
+  public ArrayList<String> getEe() {
+    return this.ee;
   }
   
   public void setEe(String ee) {
-    this.ee = ee;
+    this.ee.add(ee);
   }
   
   public String getCdrom() {
@@ -193,12 +205,12 @@ public class Item {
     this.cdrom = cdrom;
   }
   
-  public String getCite() {
-    return cite;
+  public ArrayList<String> getCite() {
+    return this.cite;
   }
   
   public void setCite(String cite) {
-    this.cite = cite;
+    this.cite.add(cite);
   }
   
   public String getPublisher() {
@@ -225,12 +237,12 @@ public class Item {
     this.crossref = crossref;
   }
   
-  public String getIsbn() {
-    return isbn;
+  public ArrayList<String> getIsbn() {
+    return this.isbn;
   }
   
   public void setIsbn(String isbn) {
-    this.isbn = isbn;
+    this.isbn.add(isbn);
   }
   
   public String getSeries() {
@@ -241,12 +253,12 @@ public class Item {
     this.series = series;
   }
   
-  public String getSchool() {
-    return school;
+  public ArrayList<String> getSchool() {
+    return this.school;
   }
   
   public void setSchool(String school) {
-    this.school = school;
+    this.school.add(school);
   }
   
   public String getChapter() {

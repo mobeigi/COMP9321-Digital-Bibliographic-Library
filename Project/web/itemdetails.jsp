@@ -85,20 +85,22 @@
         }
 
         //Author
-        if(item.getAuthor() != null) {
+        if(item.getAuthor().size() != 0) {
       %>
       <tr>
         <td class="firstcol"><strong>Author</strong></td>
-        <td><% out.print(item.getAuthor()); %></td>
+        <td><% for (String s : item.getAuthor())
+                out.print(s + "<br />"); %></td>
       </tr>
       <%
         }
         //Editor
-        if(item.getEditor() != null) {
+        if(item.getEditor().size() != 0) {
       %>
       <tr>
         <td class="firstcol"><strong>Editor</strong></td>
-        <td><% out.print(item.getEditor()); %></td>
+        <td><% for (String s : item.getEditor())
+                out.print(s + "<br />"); %></td>
       </tr>
       <%
         }
@@ -166,20 +168,22 @@
       <%
         }
         //URL
-        if(item.getUrl() != null) {
+        if(item.getUrl().size() != 0) {
       %>
       <tr>
         <td class="firstcol"><strong>URL</strong></td>
-        <td><% out.print(item.getUrl()); %></td>
+        <td><% for (String s : item.getUrl())
+                out.print(s + "<br />"); %></td>
       </tr>
       <%
         }
-        //EEE
-        if(item.getEe() != null) {
+        //EE
+        if(item.getEe().size() != 0) {
       %>
       <tr>
         <td class="firstcol"><strong>EE</strong></td>
-        <td><% out.print(item.getEe()); %></td>
+        <td><% for (String s : item.getEe())
+                out.print(s + "<br />"); %></td>
       </tr>
       <%
         }
@@ -193,11 +197,12 @@
       <%
         }
         //cite
-        if(item.getCite() != null) {
+        if(item.getCite().size() != 0) {
       %>
       <tr>
         <td class="firstcol"><strong>Cite</strong></td>
-        <td><% out.print(item.getCite()); %></td>
+        <td><% for (String s : item.getCite())
+                out.print(s + "<br />"); %></td>
       </tr>
       <%
         }
@@ -229,11 +234,12 @@
       <%
         }
         //ISBN
-        if(item.getIsbn() != null) {
+        if(item.getIsbn().size() != 0) {
       %>
       <tr>
         <td class="firstcol"><strong>ISBN</strong></td>
-        <td><% out.print(item.getIsbn()); %></td>
+        <td><% for (String s : item.getIsbn())
+                 out.print(s + "<br />"); %></td>
       </tr>
       <%
         }
@@ -247,11 +253,12 @@
       <%
         }
         //School
-        if(item.getSchool() != null) {
+        if(item.getSchool().size() != 0) {
       %>
       <tr>
         <td class="firstcol"><strong>School</strong></td>
-        <td><% out.print(item.getSchool()); %></td>
+        <td><% for (String s : item.getSchool())
+                out.print(s + "<br />"); %></td>
       </tr>
       <%
         }
