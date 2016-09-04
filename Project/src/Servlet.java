@@ -50,9 +50,10 @@ public class Servlet extends javax.servlet.http.HttpServlet {
   private void parseXML() throws ParserConfigurationException, IOException, SAXException {
     ServletContext context = getServletContext();
     InputSource xmlFile = new InputSource(context.getResourceAsStream("dblp/dblp_sample.xml"));
+    xmlFile.setEncoding("ISO-8859-1");
+    
     SAXParserFactory factory = SAXParserFactory.newInstance();
     try {
-      System.out.println("Parsing XML file...");
       SAXParser saxParser = factory.newSAXParser();
       SaxHandler handler = new SaxHandler();
       saxParser.parse(xmlFile,  handler);

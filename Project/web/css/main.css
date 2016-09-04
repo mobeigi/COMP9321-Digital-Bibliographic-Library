@@ -3,6 +3,32 @@
 *
 */
 
+
+/*
+ *  Page includes
+ */
+
+/* Main container */
+.headerpadding {
+  display: block;
+  height: 150px;
+}
+#welcome {
+  min-height: 100%;
+  height: auto !important;
+  margin: 0 auto -372px; /* the bottom margin is the negative value of the footer's height */
+}
+
+/* Footer */
+
+.footer, .push {
+  height: 372px; /* '.push' must be the same height as 'footer' */
+}
+
+/*
+ *  Page specific
+ */
+
 /* Index */
 table#randomlist {
   width:100%;
@@ -76,4 +102,14 @@ table#itemdetails .firstCol {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+/* Results */
+table#resultslist {
+  width:100%;
+  margin: 0 auto;
+}
+
+table#resultslist .faCol {
+  margin-left: 10px;
 }

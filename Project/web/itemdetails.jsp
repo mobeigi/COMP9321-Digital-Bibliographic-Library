@@ -20,10 +20,10 @@
 
 <body>
 <%@include file="header.html"%>
-<div style="display: block;height: 150px;"></div>
 
 <!-- Main container -->
 <section id="welcome">
+  <div class="headerpadding"></div>
   <div class="container">
     <h2>Item <span>Details</span></h2>
     <hr class="sep">
@@ -288,6 +288,7 @@
 
 
   </div>
+  <div class="push"></div>
 </section>
 
 <%@include file="footer.html"%>

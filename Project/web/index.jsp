@@ -23,14 +23,14 @@
 <div id="owl-hero" class="owl-carousel owl-theme">
   <div class="item" style="background-image: url(images/sliders/Slide1.jpg)">
     <div class="caption">
-      <h6>Over 1000 new articles added daily!</h6>
+      <h6>Over 1000 new publications added daily!</h6>
       <h1>Powerful <span>Search</span></h1>
       <a class="btn btn-transparent" href="#">Search Now</a>
     </div>
   </div>
   <div class="item" style="background-image: url(images/sliders/Slide2.jpg)">
     <div class="caption">
-      <h6>Share your articles with 12.8 million monthly visitors</h6>
+      <h6>Share your publications with 12.8 million monthly visitors</h6>
       <h1>Get <span>Discovered</span></h1>
     </div>
   </div>
@@ -47,7 +47,7 @@
     <div class="container">
         <h2>Welcome To <span>DBL+</span></h2>
         <hr class="sep">
-        <p>Leading Digital Bibliographic Library host with over 3.4 million catalogued items!</p>
+        <p>Leading Digital Bibliographic Library host with over 3.4 million catalogued publications!</p>
         <img class="img-responsive center-block wow fadeInUp" data-wow-delay=".3s" src="images/logo/logo_black.png" alt="logo">
 
         <br />
@@ -75,7 +75,7 @@
             <option value="<% out.print(Item.ItemTypes.WWW); %>">Website</option>
           </select>
           <br />
-          <input type="submit" />
+          <input type="submit" value="Search" />
         </form>
         </div>
 
@@ -112,6 +112,7 @@
 
         </table>
     </div>
+  <div class="push"></div>
 </section>
 
 <%@include file="footer.html"%>
