@@ -29,7 +29,8 @@ public class Servlet extends javax.servlet.http.HttpServlet {
   protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
     
     //Get Page request came from
-    System.out.println(request.getSession().getAttribute("page"));
+    String pageName = (String)request.getSession().getAttribute("page");
+    System.out.println(pageName);
     
     //Parse XML database if we haven't done so already
     if (!xmlParsed) {
@@ -37,9 +38,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
       try {
         parseXML();
         xmlParsed = true;
-      } catch (ParserConfigurationException e) {
-      } catch (SAXException e) {
-      }
+      } catch (ParserConfigurationException | SAXException e) {}
   
       //Set attribute for items
       HttpSession session = request.getSession();

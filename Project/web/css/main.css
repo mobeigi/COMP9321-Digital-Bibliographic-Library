@@ -1,0 +1,28 @@
+/*
+*   Main Stylesheet for DLB+
+*
+*/
+
+/* Index */
+table#randomlist {
+  width:100%;
+  margin: 0 auto;
+}
+
+table#randomlist .faCol {
+  margin-left: 10px;
+}
+
+/* Item Details */
+table#itemdetails {
+  margin: 0 auto;
+  text-align:center;
+}
+
+table#itemdetails th,td {
+  text-align: left;
+}
+
+table#itemdetails .firstCol {
+  padding-right: 20px;
+}
