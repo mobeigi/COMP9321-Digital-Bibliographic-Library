@@ -25,7 +25,7 @@
     <div class="caption">
       <h6>Over 1000 new publications added daily!</h6>
       <h1>Powerful <span>Search</span></h1>
-      <a class="btn btn-transparent" href="#">Search Now</a>
+      <a class="btn btn-transparent" href="/search.jsp">Search Now</a>
     </div>
   </div>
   <div class="item" style="background-image: url(images/sliders/Slide2.jpg)">

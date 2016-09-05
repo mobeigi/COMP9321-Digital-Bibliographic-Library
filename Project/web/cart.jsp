@@ -28,18 +28,23 @@
     <h2>Shopping <span>Cart</span></h2>
     <hr class="sep">
 
-    <table id="cartlist">
       <%
         ArrayList<Item> items = (ArrayList<Item>) request.getSession().getAttribute("itemList");
         ArrayList<Integer> cartContents = (ArrayList<Integer>)request.getSession().getAttribute("shoppingcart");
 
-        //Print out results
-
+        //Print out cart size information
       if (cartContents.size() > 0) { %>
+     <form action="cart.jsp" method="post">
+      <table id="cartlist">
       <p>There are currently <strong><% out.print(cartContents.size()); %></strong> items in your shopping cart.</p>
+        <tr>
+          <td></td>
+          <td></td>
+          <td style="text-align: center;"><i class="fa fa-minus-square" title="Check items for removal"></i></td>
+        </tr>
       <%
       } else { //Empty cart %>
-      <p>Shopping Cart is Empty.</p>
+      <p>Your shopping cart is empty.</p>
       <%
         }
 
@@ -60,10 +65,20 @@
       <tr>
         <td class="faCol"><i class="fa fa-newspaper-o"></i></td>
         <td><a href="/itemdetails.jsp?id=<% out.print(item.getId()); %>" title="View item details"><% out.print(title); %></a></td>
+        <td style="text-align: center;"><input type="checkbox" name="selectedCartItems" value="<% out.print(item.getId()); %>" title="Check to mark this item for removal"/></td>
       </tr>
       <%
         }
-      %></table>
+
+        %>
+      </table><a href="/search.jsp"><input class="nicebutton" type="button" value="Return to search" /></a>
+        <%
+        if (cartContents.size() > 0) {
+        %>
+          <input class="nicebutton" type="submit" value="Remove items from cart" /> <%
+        }
+        %></form><%
+      %>
   <div class="push"></div>
 </section>
 

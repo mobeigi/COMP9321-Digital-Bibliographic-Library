@@ -21,10 +21,26 @@ import javax.xml.parsers.SAXParser;
 @WebServlet("/servlet")
 public class Servlet extends javax.servlet.http.HttpServlet {
   private List<Item> items;
-  private List<Integer> shoppingcart; //list of unique ids
   private boolean xmlParsed = false;
   
   protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    String pageName = (String)request.getSession().getAttribute("page");
+    
+    if (pageName.equals("shoppingcart")) {
+      //Get post parameters
+      String[] qIDList = (request.getParameterValues("selectedCartItems") == null) ? null : request.getParameterValues("selectedCartItems");
+      ArrayList<Integer> cart = (ArrayList<Integer>) request.getSession().getAttribute("shoppingcart");;
+      
+      if (qIDList != null) {
+        //Remove various items from cart
+        for (String id : qIDList) {
+          try {
+            cart.remove(Integer.valueOf(Integer.parseInt(id) - 1)); //Remove first instance of ID
+          } catch (NumberFormatException e) {}
+        }
+      }
+    }
+  
   }
   
   protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
@@ -35,7 +51,6 @@ public class Servlet extends javax.servlet.http.HttpServlet {
     
     //Parse XML database if we haven't done so already
     if (!xmlParsed) {
-      System.out.println("REPARSING");
       
       //Parse XML file
       try {
@@ -52,13 +67,8 @@ public class Servlet extends javax.servlet.http.HttpServlet {
     
     //Create shopping cart if none exist
     if (request.getSession().getAttribute("shoppingcart") == null) {
-      this.shoppingcart = new ArrayList<Integer>();
-      
-      //Temp test
-      this.shoppingcart.add(1);
-      this.shoppingcart.add(10);
-      
-      request.getSession().setAttribute("shoppingcart", this.shoppingcart);
+      List<Integer> shoppingcart = new ArrayList<Integer>();
+      request.getSession().setAttribute("shoppingcart", shoppingcart);
     }
   }
   
