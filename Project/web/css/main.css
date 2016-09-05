@@ -180,5 +180,6 @@ input[type=button].nicebutton, input[type=submit].nicebutton {
 }
 
 #errorbox {
+  margin-top: 20px;
   color: red;
 }
