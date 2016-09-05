@@ -36,7 +36,11 @@ public class Servlet extends javax.servlet.http.HttpServlet {
           if (idStr != null) {
             try {
               int id = Integer.parseInt(idStr);
-              cart.add(id - 1);
+              
+              //Ensure ID is in valid range
+              if (id > 0 && id <= items.size()) {
+                cart.add(id - 1);
+              }
             } catch (NumberFormatException e) {}
           }
         } else if (action.equals("removefromcart")) {

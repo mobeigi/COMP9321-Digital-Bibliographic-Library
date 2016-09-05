@@ -77,7 +77,8 @@ table#itemdetails .firstCol {
   text-align: left;
 }
 
-.searchbox input[type=text]:focus input[type=month]:focus {
+.searchbox input[type=text]:focus,
+.searchbox input[type=month]:focus {
   text-align: center;
 }
 

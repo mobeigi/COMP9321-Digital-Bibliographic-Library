@@ -25,7 +25,7 @@
 <section id="welcome">
   <div class="headerpadding"></div>
   <div class="container">
-    <h2>DLB+ <span>Search</span></h2>
+    <h2>Advanced <span>Search</span></h2>
     <hr class="sep">
     <p>Search for publications in our extensive catalogue using our advanced search below.</p>
     <div class="searchbox">
