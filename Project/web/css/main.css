@@ -81,17 +81,15 @@ table#itemdetails .firstCol {
   text-align: center;
 }
 
-.searchbox #author {
+.searchbox .left {
   display: inline-block;
-  width: 70%;
   float: left;
 }
 
-.searchbox #year {
+.searchbox .right {
   display: inline-block;
   width: auto;
   margin-left: 8px;
-  max-width: calc(30% - 8px);
   float: left;
 }
 

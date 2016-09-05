@@ -55,10 +55,10 @@
         <hr class="sep">
         <div class="searchbox">
         <form action="results.jsp" method="get">
-          <input type="text" name="title" placeholder="Publication Title" />
+          <input type="text" name="title" placeholder="Title" />
           <br />
-          <input type="text" name="author" placeholder="Author (comma seperated)" id="author"/>
-          <input type="text" name="year" maxlength="4" placeholder="Publication Year" id="year" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+          <input type="text" name="author" placeholder="Author (comma seperated)" class="left" style="width: 70%;" />
+          <input type="text" name="year" maxlength="4" placeholder="Year" class="right" style="width:30%; max-width: calc(30% - 8px);" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
           <br />
           <input type="text" name="venue" placeholder="Venue (semicolon seperated)"/>
           <br />

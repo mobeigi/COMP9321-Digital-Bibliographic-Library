@@ -26,27 +26,27 @@ public class Item {
   //We will treat all as strings
   private int id;
   private ItemTypes type;
-  private ArrayList<String> author = new ArrayList<>();  //multiple, no commas in author names
-  private ArrayList<String> editor = new ArrayList<>(); //multiple, no commas in author names
+  private ArrayList<String> author = new ArrayList<>();  //multiple, comma safe
+  private ArrayList<String> editor = new ArrayList<>(); //multiple, comma safe
   private String title;
-  private String booktitle;
+  private String booktitle; //part of venue search
   private String pages;
   private String year;
   private String address;
-  private String journal;
-  private String volume;
-  private String number;
-  private String month;
-  private ArrayList<String> url = new ArrayList<>(); //multiple
-  private ArrayList<String> ee = new ArrayList<>(); //multiple
+  private String journal; //part of venue search
+  private String volume; //can be number or string
+  private String number;  //integer
+  private String month; //eg april
+  private ArrayList<String> url = new ArrayList<>(); //multiple, comma safe
+  private ArrayList<String> ee = new ArrayList<>(); //multiple, vertical bar safe
   private String cdrom;
-  private ArrayList<String> cite = new ArrayList<>(); //multiple
+  private ArrayList<String> cite = new ArrayList<>(); //multiple, comma safe
   private String publisher;
   private String note;
   private String crossref;
-  private ArrayList<String> isbn = new ArrayList<>(); //multiple
+  private ArrayList<String> isbn = new ArrayList<>(); //multiple, comma safe
   private String series;
-  private ArrayList<String> school = new ArrayList<>();  //multiple
+  private ArrayList<String> school = new ArrayList<>();  //multiple, semicolon safe, part of venue search
   private String chapter;
   
   /**
@@ -84,17 +84,6 @@ public class Item {
   
   public ArrayList<String> getAuthor() {
     return this.author;
-  }
-  
-  public String getAuthorLine() {
-    StringBuilder sb = new StringBuilder();
-    for (String s : this.author)
-    {
-      sb.append(s);
-      sb.append(";");
-    }
-    
-    return sb.toString();
   }
   
   public void setAuthor(String author) {

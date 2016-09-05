@@ -86,7 +86,7 @@
             boolean skip = false;
 
             for (String author : qAuthorList) {
-              if (!item.getAuthor().contains(author)) {
+              if (!item.getAuthor().contains(author)) { //TODO: This should do a contains on string, not exact string match
                 skip = true;
                 break;
               }
