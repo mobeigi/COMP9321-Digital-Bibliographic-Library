@@ -31,12 +31,13 @@
 
 /* Index */
 table#randomlist {
-  width:100%;
+  width: 85%;
   margin: 0 auto;
 }
 
 table#randomlist .faCol {
   margin-left: 10px;
+  width: 40px;
 }
 
 /* Item Details */
@@ -107,12 +108,13 @@ table#itemdetails .firstCol {
 
 /* Results */
 table#resultslist {
-  width:100%;
+  width: 85%;
   margin: 0 auto;
 }
 
 table#resultslist .faCol {
   margin-left: 10px;
+  width: 40px;
 }
 
 p.result_summary {

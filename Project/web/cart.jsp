@@ -14,7 +14,7 @@
 
 <html>
 <head>
-  <title>DBL+ - Shopping Cart</title>
+  <title>DBL+ | Shopping Cart</title>
   <%@include file="headerinclude.html"%>
 
   <script type="text/javascript">

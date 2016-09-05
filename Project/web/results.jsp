@@ -14,7 +14,7 @@
 
 <html>
 <head>
-  <title>DBL+ - Search Results</title>
+  <title>DBL+ | Search Results</title>
   <%@include file="headerinclude.html"%>
 </head>
 

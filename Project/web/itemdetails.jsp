@@ -8,7 +8,7 @@
 
 <html>
 <head>
-  <title>DBL+ - Item Details <%
+  <title>DBL+ | Item Details <%
     if(request.getParameter("id") != null) {
       out.print("(" + request.getParameter("id") + ")");
     }

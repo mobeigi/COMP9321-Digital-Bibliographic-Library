@@ -11,7 +11,7 @@
 
 <html>
 <head>
-  <title>DBL+ - Homepage</title>
+  <title>DBL+ | Homepage</title>
   <%@include file="headerinclude.html"%>
 </head>
 
