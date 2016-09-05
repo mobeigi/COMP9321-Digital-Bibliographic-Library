@@ -150,8 +150,13 @@
         double searchTime = (double)(elapsedTime) / 1000000000.0; //in seconds, nano time * 10^9
 
       %>
+        <% if (numResults > 0) { %>
         <p>Found <strong><% out.print(NumberFormat.getInstance().format(numResults)); %></strong> results in <strong><% out.write(new DecimalFormat("0.000000").format(searchTime)); %> seconds</strong></p>
         <%
+        } else { //No results found %>
+        <p>Sorry, no matching datasets found!</p>
+        <%
+        }
 
         //Print matched results
         for (Item item: matchedItems) {
