@@ -16,6 +16,16 @@
 <head>
   <title>DBL+ - Shopping Cart</title>
   <%@include file="headerinclude.html"%>
+
+  <script type="text/javascript">
+  function inverseCheck() {
+    var allInputs = document.getElementsByTagName("input");
+    for (var i = 0, max = allInputs.length; i < max; i++) {
+      if (allInputs[i].type === 'checkbox')
+        allInputs[i].checked = !allInputs[i].checked;
+    }
+  }
+  </script>
 </head>
 
 <body>
@@ -38,9 +48,10 @@
       <table id="cartlist">
       <p>There are currently <strong><% out.print(cartContents.size()); %></strong> items in your shopping cart.</p>
         <tr>
-          <td></td>
-          <td></td>
-          <td style="text-align: center;"><i class="fa fa-minus-square" title="Check items for removal"></i></td>
+          <th></th>
+          <th></th>
+          <th class="checkboxheadcol"><i class="fa fa-minus-square" title="Check items for removal"></i>
+          <br /><input type="checkbox" onchange="inverseCheck();this.checked = !this.checked;" title="Inverse selection"/></th>
         </tr>
       <%
       } else { //Empty cart %>
