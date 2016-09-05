@@ -134,3 +134,13 @@ div#paginationbox p.pageNoOf {
   font-family: monospace;
   font-size: 15px;
 }
+
+/* Shopping Cart */
+table#cartlist {
+  width:100%;
+  margin: 0 auto;
+}
+
+table#cartlist .faCol {
+  margin-left: 10px;
+}

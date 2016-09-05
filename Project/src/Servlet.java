@@ -13,6 +13,7 @@ import javax.servlet.ServletContext;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
@@ -20,6 +21,7 @@ import javax.xml.parsers.SAXParser;
 @WebServlet("/servlet")
 public class Servlet extends javax.servlet.http.HttpServlet {
   private List<Item> items;
+  private List<Integer> shoppingcart; //list of unique ids
   private boolean xmlParsed = false;
   
   protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
@@ -45,7 +47,18 @@ public class Servlet extends javax.servlet.http.HttpServlet {
   
     //Set attribute for items if it doesn't already exist
     if (request.getSession().getAttribute("itemList") == null) {
-      request.getSession().setAttribute("itemList", items);
+      request.getSession().setAttribute("itemList", this.items);
+    }
+    
+    //Create shopping cart if none exist
+    if (request.getSession().getAttribute("shoppingcart") == null) {
+      this.shoppingcart = new ArrayList<Integer>();
+      
+      //Temp test
+      this.shoppingcart.add(1);
+      this.shoppingcart.add(10);
+      
+      request.getSession().setAttribute("shoppingcart", this.shoppingcart);
     }
   }
   
