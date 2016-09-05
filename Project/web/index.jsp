@@ -48,7 +48,6 @@
         <h2>Welcome To <span>DBL+</span></h2>
         <hr class="sep">
         <p>Leading Digital Bibliographic Library host with over 3.4 million catalogued publications!</p>
-        <img class="img-responsive center-block wow fadeInUp" data-wow-delay=".3s" src="images/logo/logo_black.png" alt="logo">
 
         <br />
         <!-- Simple Search -->
