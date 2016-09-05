@@ -112,10 +112,6 @@ public class Servlet extends javax.servlet.http.HttpServlet {
     //Create shopping cart if none exist
     if (request.getSession().getAttribute("shoppingcart") == null) {
       List<Integer> shoppingcart = new ArrayList<Integer>();
-      shoppingcart.add(185);
-      shoppingcart.add(185);
-      shoppingcart.add(185);
-      shoppingcart.add(185);
       request.getSession().setAttribute("shoppingcart", shoppingcart);
     }
   }
