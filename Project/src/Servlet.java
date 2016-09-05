@@ -4,6 +4,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +26,8 @@ public class Servlet extends javax.servlet.http.HttpServlet {
   private boolean xmlParsed = false;
   
   protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    initSetup(request, response);
+    
     String pageName = (String)request.getSession().getAttribute("page");
     
     if (pageName.equals("shoppingcart")) {
@@ -64,27 +68,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
   }
   
   protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-    //Parse XML database if we haven't done so already
-    if (!xmlParsed) {
-      
-      //Parse XML file
-      try {
-        parseXML();
-        xmlParsed = true;
-      } catch (ParserConfigurationException | SAXException e) {}
-      
-    }
-  
-    //Set attribute for items if it doesn't already exist
-    if (request.getSession().getAttribute("itemList") == null) {
-      request.getSession().setAttribute("itemList", this.items);
-    }
-    
-    //Create shopping cart if none exist
-    if (request.getSession().getAttribute("shoppingcart") == null) {
-      List<Integer> shoppingcart = new ArrayList<Integer>();
-      request.getSession().setAttribute("shoppingcart", shoppingcart);
-    }
+    initSetup(request, response);
   }
   
   //Helper classes
@@ -105,6 +89,34 @@ public class Servlet extends javax.servlet.http.HttpServlet {
       
     } catch (Throwable err) {
       err.printStackTrace();
+    }
+  }
+  
+  private void initSetup(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws IOException {
+    //Parse XML database if we haven't done so already
+    if (!xmlParsed) {
+    
+      //Parse XML file
+      try {
+        parseXML();
+        xmlParsed = true;
+      } catch (ParserConfigurationException | SAXException e) {}
+    
+    }
+    
+    //Set attribute for items if it doesn't already exist
+    if (request.getSession().getAttribute("itemList") == null) {
+      request.getSession().setAttribute("itemList", this.items);
+    }
+  
+    //Create shopping cart if none exist
+    if (request.getSession().getAttribute("shoppingcart") == null) {
+      List<Integer> shoppingcart = new ArrayList<Integer>();
+      shoppingcart.add(185);
+      shoppingcart.add(185);
+      shoppingcart.add(185);
+      shoppingcart.add(185);
+      request.getSession().setAttribute("shoppingcart", shoppingcart);
     }
   }
 }

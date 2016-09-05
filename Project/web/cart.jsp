@@ -22,8 +22,36 @@
     var allInputs = document.getElementsByTagName("input");
     for (var i = 0, max = allInputs.length; i < max; i++) {
       if (allInputs[i].type === 'checkbox')
-        allInputs[i].checked = !allInputs[i].checked;
+        if (allInputs[i].name === 'selectedCartItems')
+          allInputs[i].checked = !allInputs[i].checked;
     }
+  }
+
+  function emptyCheck() {
+    var allInputs = document.getElementsByTagName("input");
+    var oneChecked = false;
+    for (var i = 0, max = allInputs.length; i < max; i++) {
+      if (allInputs[i].type === 'checkbox')
+        if (allInputs[i].name === 'selectedCartItems')
+          if (allInputs[i].checked) {
+            oneChecked = true;
+            break;
+          }
+
+    }
+
+    //If no checkboxes were checked, then we are trying to
+    //remove from cart no items, let user know of this issue
+    if (!oneChecked) {
+      document.getElementById("errorbox").innerHTML = "<strong>Error:</strong> No items are marked for removal.";
+      return false;
+    }
+
+    return true;
+  }
+
+  function resetError() {
+    document.getElementById("errorbox").innerHTML = "";
   }
   </script>
 </head>
@@ -44,14 +72,14 @@
 
         //Print out cart size information
       if (cartContents.size() > 0) { %>
-     <form action="cart.jsp" method="post">
+     <form action="cart.jsp" method="post" onsubmit="return emptyCheck();">
       <table id="cartlist">
       <p>There are currently <strong><% out.print(cartContents.size()); %></strong> items in your shopping cart.</p>
         <tr>
           <th></th>
           <th></th>
           <th class="checkboxheadcol"><i class="fa fa-minus-square" title="Check items for removal"></i>
-          <br /><input type="checkbox" onchange="inverseCheck();this.checked = !this.checked;" title="Inverse selection"/></th>
+          <br /><input type="checkbox" onchange="inverseCheck();resetError();" title="Inverse selection"/></th>
         </tr>
       <%
       } else { //Empty cart %>
@@ -76,13 +104,15 @@
       <tr>
         <td class="faCol"><i class="fa fa-newspaper-o"></i></td>
         <td><a href="/itemdetails.jsp?id=<% out.print(item.getId()); %>" title="View item details"><% out.print(title); %></a></td>
-        <td style="text-align: center;"><input type="checkbox" name="selectedCartItems" value="<% out.print(item.getId()); %>" title="Check to mark this item for removal"/></td>
+        <td style="text-align: center;"><input type="checkbox" name="selectedCartItems" value="<% out.print(item.getId()); %>" title="Check to mark this item for removal" onchange="resetError();"/></td>
       </tr>
       <%
         }
 
         %>
-      </table><a href="/search.jsp"><input class="nicebutton" type="button" value="Return to search" /></a>
+      </table>
+       <p id="errorbox"></p>
+       <a href="/search.jsp"><input class="nicebutton" type="button" value="Return to search" /></a>
         <%
         if (cartContents.size() > 0) {
         %>
