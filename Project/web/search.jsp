@@ -50,7 +50,7 @@
         <input type="text" name="year" class="right" style="width:50%; max-width: calc(50% - 8px);" maxlength="4" placeholder="Year" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
         <input type="text" name="venue" placeholder="Venue (semicolon separated)"/>
         <input type="text" name="editor" placeholder="Editor (comma separated)"  />
-        <input type="text" name="publisher" placeholder="Publisher"  />
+        <input type="text" name="publisher" placeholder="Publisher" />
         <input type="text" name="address" placeholder="Address" />
 
         <input type="text" name="pages" placeholder="Pages" class="left" style="width: 25%;" />

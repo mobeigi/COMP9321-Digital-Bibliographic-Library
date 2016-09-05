@@ -74,6 +74,7 @@
             <option value="<% out.print(Item.ItemTypes.WWW); %>">Website</option>
           </select>
           <br />
+          <a href="/search.jsp" title="Use Advanced Search" style="float: right;">Advanced Search</a>
           <input type="submit" value="Search" />
         </form>
         </div>
