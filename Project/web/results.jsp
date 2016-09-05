@@ -204,64 +204,68 @@
         }
       %></table><%
 
-        //Print pagination icons
-        %>
-        <div id="paginationbox">
-        <p class="result_summary">Showing results <strong><% out.print(startIndex + 1);%></strong> to <strong><% out.print(Math.min(startIndex + resultsPerPage, matchedItems.size())); %></strong></p>
+        if (numResults > 0) { //don't show pagination box if no results found
+          //Print pagination icons
+          %>
+          <div id="paginationbox">
+          <p class="result_summary">Showing results <strong><% out.print(startIndex + 1);%></strong> to <strong><% out.print(Math.min(startIndex + resultsPerPage, matchedItems.size())); %></strong></p>
+          <%
+          String currentFullUrl = request.getRequestURL().toString();
+
+          //Ensure query string is not empty
+          if (request.getQueryString() != null && !request.getQueryString().isEmpty()) {
+            String[] queries = request.getQueryString().split("&");
+            ArrayList<String> finalQueryStringArray = new ArrayList<String>();
+
+            //Remove current pageNo parameters
+            for (String s : queries) {
+              if (!s.startsWith("pageNo="))
+                finalQueryStringArray.add(s);
+            }
+
+            //Recombine all other parameters in same order
+            StringBuilder sb = new StringBuilder();
+            for (String s : finalQueryStringArray)
+            {
+              sb.append(s);
+              sb.append("&");
+            }
+
+            String finalQueryString = sb.toString();
+            if (finalQueryString.endsWith("&")) //remove final '&' from join
+              finalQueryString = finalQueryString.substring(0, finalQueryString.length() - 1);
+
+            currentFullUrl += ("?" + finalQueryString);
+          }
+
+          if (pageNo == 1) {
+          %>
+          <img style="vertical-align:middle;" src="/images/results/resultset_first_gray.png" title="First Page">
+          <img style="vertical-align:middle;" src="/images/results/resultset_previous_gray.png" title="Previous Page">
+          <%
+            } else { %>
+          <a href="<% out.print(currentFullUrl + "&pageNo=1");%>"><img style="vertical-align:middle;" src="/images/results/resultset_first.png" title="First Page"></a>
+          <a href="<% out.print(currentFullUrl + "&pageNo=" + (pageNo - 1));%>"><img style="vertical-align:middle;" src="/images/results/resultset_previous.png" title="Previous Page"></a>
+          <%
+            }
+
+            out.write("<p class=\"pageNoOf\">Page " + pageNo + " of " + lastPage + "</p>");
+
+            if (pageNo == lastPage) {
+          %>
+          <img style="vertical-align:middle;" src="/images/results/resultset_next_gray.png" title="Next Page">
+          <img style="vertical-align:middle;" src="/images/results/resultset_last_gray.png" title="Last Page">
+          <%
+          } else { %>
+          <a href="<% out.print(currentFullUrl + "&pageNo=" + (pageNo + 1));%>"><img style="vertical-align:middle;" src="/images/results/resultset_next.png" title="Next Page"></a>
+          <a href="<% out.print(currentFullUrl + "&pageNo=" + lastPage);%>"><img style="vertical-align:middle;" src="/images/results/resultset_last.png" title="Last Page"></a>
+          <%
+            }
+          %>
+          </div>
         <%
-        String currentFullUrl = request.getRequestURL().toString();
-
-        //Ensure query string is not empty
-        if (request.getQueryString() != null && !request.getQueryString().isEmpty()) {
-          String[] queries = request.getQueryString().split("&");
-          ArrayList<String> finalQueryStringArray = new ArrayList<String>();
-
-          //Remove current pageNo parameters
-          for (String s : queries) {
-            if (!s.startsWith("pageNo="))
-              finalQueryStringArray.add(s);
-          }
-
-          //Recombine all other parameters in same order
-          StringBuilder sb = new StringBuilder();
-          for (String s : finalQueryStringArray)
-          {
-            sb.append(s);
-            sb.append("&");
-          }
-
-          String finalQueryString = sb.toString();
-          if (finalQueryString.endsWith("&")) //remove final '&' from join
-            finalQueryString = finalQueryString.substring(0, finalQueryString.length() - 1);
-
-          currentFullUrl += ("?" + finalQueryString);
         }
-
-        if (pageNo == 1) {
-      %>
-      <img style="vertical-align:middle;" src="/images/results/resultset_first_gray.png" title="First Page">
-      <img style="vertical-align:middle;" src="/images/results/resultset_previous_gray.png" title="Previous Page">
-      <%
-        } else { %>
-      <a href="<% out.print(currentFullUrl + "&pageNo=1");%>"><img style="vertical-align:middle;" src="/images/results/resultset_first.png" title="First Page"></a>
-      <a href="<% out.print(currentFullUrl + "&pageNo=" + (pageNo - 1));%>"><img style="vertical-align:middle;" src="/images/results/resultset_previous.png" title="Previous Page"></a>
-      <%
-        }
-
-        out.write("<p class=\"pageNoOf\">Page " + pageNo + " of " + lastPage + "</p>");
-
-        if (pageNo == lastPage) {
-      %>
-      <img style="vertical-align:middle;" src="/images/results/resultset_next_gray.png" title="Next Page">
-      <img style="vertical-align:middle;" src="/images/results/resultset_last_gray.png" title="Last Page">
-      <%
-      } else { %>
-      <a href="<% out.print(currentFullUrl + "&pageNo=" + (pageNo + 1));%>"><img style="vertical-align:middle;" src="/images/results/resultset_next.png" title="Next Page"></a>
-      <a href="<% out.print(currentFullUrl + "&pageNo=" + lastPage);%>"><img style="vertical-align:middle;" src="/images/results/resultset_last.png" title="Last Page"></a>
-      <%
-        }
-      %>
-        </div>
+        %>
   </div>
   <div class="push"></div>
 </section>
