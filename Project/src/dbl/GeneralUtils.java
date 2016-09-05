@@ -9,10 +9,29 @@ public class GeneralUtils {
    * @param data the data being queried against
    * @return true if item should be skipped (match failed), false otherwise
    */
-  public static boolean querySkip(String query, String data) {
-    if (query != null)
-      if (data == null || !data.toLowerCase().contains(query.toLowerCase()))
+  public static boolean querySkip(String query, String data, boolean matchCase, boolean exactMatch) {
+    if (query != null) {
+      if (data == null)
         return true;
+        
+      String caseConvertedData = data;
+      String caseConvertedQuery = query;
+      
+      if (!matchCase) {
+        caseConvertedData = data.toLowerCase();
+        caseConvertedQuery = query.toLowerCase();
+      }
+      
+      if (exactMatch) {
+        if (!caseConvertedData.equals(caseConvertedQuery))
+          return true;
+      }
+      else {
+        if (!caseConvertedData.contains(caseConvertedQuery))
+          return true;
+      }
+    }
+    
     return false;
   }
   
@@ -26,7 +45,7 @@ public class GeneralUtils {
    * @param data the data being queried against
    * @return true if item should be skipped (match failed), false otherwise
    */
-  public static boolean querySkipArray(String[] query, String[] data) {
+  public static boolean querySkipArray(String[] query, String[] data, boolean matchCase, boolean exactMatch) {
     if (query.length  != 0) {
       if (data.length == 0) {
         return true;
@@ -38,7 +57,7 @@ public class GeneralUtils {
         
         //Iterate through data
         for (String sData : data) {
-          if (!querySkip(sQuery, sData)) {  //delegate to querySkip for string,string comparisons
+          if (!querySkip(sQuery, sData, matchCase, exactMatch)) {  //delegate to querySkip for string,string comparisons
             found = true;
             break;
           }

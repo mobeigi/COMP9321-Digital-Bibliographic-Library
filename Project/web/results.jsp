@@ -63,6 +63,15 @@
         String qUrl = (request.getParameter("url") == null || request.getParameter("url").isEmpty()) ? null : new String( request.getParameter("url").getBytes(), "UTF-8").trim();
         String qNotes = (request.getParameter("note") == null || request.getParameter("note").isEmpty()) ? null : new String( request.getParameter("note").getBytes(), "UTF-8").trim();
 
+        //Options
+        String strMatchCase = (request.getParameterValues("matchcase") == null) ? null : request.getParameterValues("matchcase")[0];
+        String strExactMatch = (request.getParameterValues("exactmatch") == null) ? null : request.getParameterValues("exactmatch")[0];
+        boolean matchCase, exactMatch;
+        matchCase = exactMatch = false;
+
+        if (strMatchCase != null && strMatchCase.equals("on")) matchCase = true;
+        if (strExactMatch != null && strExactMatch.equals("on")) exactMatch = true;
+
         //Handle separated multiple items
         //We also trim any whitespace around entries
         String[] qAuthorList = new String[0];
@@ -88,7 +97,7 @@
           //We achieve this by skipping items that do not match each query
 
           //Title
-          if (GeneralUtils.querySkip(qTitle, item.getTitle()))
+          if (GeneralUtils.querySkip(qTitle, item.getTitle(), matchCase, exactMatch))
             continue;
 
           //Handle qFromDate, qToDate
@@ -170,78 +179,78 @@
           }
 
           //Year
-          if (GeneralUtils.querySkip(qYear, item.getYear()))
+          if (GeneralUtils.querySkip(qYear, item.getYear(), matchCase, exactMatch))
             continue;
 
           //Month
-          if (GeneralUtils.querySkip(qMonth, item.getMonth()))
+          if (GeneralUtils.querySkip(qMonth, item.getMonth(), matchCase, exactMatch))
             continue;
 
           //Publisher
-          if (GeneralUtils.querySkip(qPublisher, item.getPublisher()))
+          if (GeneralUtils.querySkip(qPublisher, item.getPublisher(), matchCase, exactMatch))
             continue;
 
           //Address
-          if (GeneralUtils.querySkip(qAddress, item.getAddress()))
+          if (GeneralUtils.querySkip(qAddress, item.getAddress(), matchCase, exactMatch))
             continue;
 
           //Pages
-          if (GeneralUtils.querySkip(qPages, item.getPages()))
+          if (GeneralUtils.querySkip(qPages, item.getPages(), matchCase, exactMatch))
             continue;
 
           //Chapter
-          if (GeneralUtils.querySkip(qChapter, item.getChapter()))
+          if (GeneralUtils.querySkip(qChapter, item.getChapter(), matchCase, exactMatch))
             continue;
 
           //Volume
-          if (GeneralUtils.querySkip(qVolume, item.getVolume()))
+          if (GeneralUtils.querySkip(qVolume, item.getVolume(), matchCase, exactMatch))
             continue;
 
           //Number
-          if (GeneralUtils.querySkip(qNumber, item.getNumber()))
+          if (GeneralUtils.querySkip(qNumber, item.getNumber(), matchCase, exactMatch))
             continue;
 
           //Crossref
-          if (GeneralUtils.querySkip(qCrossref, item.getCrossref()))
+          if (GeneralUtils.querySkip(qCrossref, item.getCrossref(), matchCase, exactMatch))
             continue;
 
           //Series
-          if (GeneralUtils.querySkip(qSeries, item.getSeries()))
+          if (GeneralUtils.querySkip(qSeries, item.getSeries(), matchCase, exactMatch))
             continue;
 
           //Cdrom
-          if (GeneralUtils.querySkip(qCdrom, item.getCdrom()))
+          if (GeneralUtils.querySkip(qCdrom, item.getCdrom(), matchCase, exactMatch))
             continue;
 
           //Notes
-          if (GeneralUtils.querySkip(qNotes, item.getNote()))
+          if (GeneralUtils.querySkip(qNotes, item.getNote(), matchCase, exactMatch))
             continue;
 
           //Now check multiple fields last
           //Check last for performance reasons
 
           //Author
-          if (GeneralUtils.querySkipArray(qAuthorList, item.getAuthor().toArray(new String[item.getAuthor().size()])))
+          if (GeneralUtils.querySkipArray(qAuthorList, item.getAuthor().toArray(new String[item.getAuthor().size()]), matchCase, exactMatch))
             continue;
 
           //Editor
-          if (GeneralUtils.querySkipArray(qEditorList, item.getEditor().toArray(new String[item.getEditor().size()])))
+          if (GeneralUtils.querySkipArray(qEditorList, item.getEditor().toArray(new String[item.getEditor().size()]), matchCase, exactMatch))
             continue;
 
           //ISBN
-          if (GeneralUtils.querySkipArray(qIsbnList, item.getIsbn().toArray(new String[item.getIsbn().size()])))
+          if (GeneralUtils.querySkipArray(qIsbnList, item.getIsbn().toArray(new String[item.getIsbn().size()]), matchCase, exactMatch))
             continue;
 
           //Citing
-          if (GeneralUtils.querySkipArray(qCiteList, item.getCite().toArray(new String[item.getCite().size()])))
+          if (GeneralUtils.querySkipArray(qCiteList, item.getCite().toArray(new String[item.getCite().size()]), matchCase, exactMatch))
             continue;
 
           //EE
-          if (GeneralUtils.querySkipArray(qEeList, item.getEe().toArray(new String[item.getEe().size()])))
+          if (GeneralUtils.querySkipArray(qEeList, item.getEe().toArray(new String[item.getEe().size()]), matchCase, exactMatch))
             continue;
 
           //URL
-          if (GeneralUtils.querySkipArray(qUrlList, item.getUrl().toArray(new String[item.getUrl().size()])))
+          if (GeneralUtils.querySkipArray(qUrlList, item.getUrl().toArray(new String[item.getUrl().size()]), matchCase, exactMatch))
             continue;
 
           //Venue
@@ -250,12 +259,12 @@
           //thesis have a field called "school"
           boolean schoolSkip = false;
 
-          if (GeneralUtils.querySkipArray(new String[]{qVenue}, item.getSchool().toArray(new String[item.getAuthor().size()])))
+          if (GeneralUtils.querySkipArray(qVenueList, item.getSchool().toArray(new String[item.getAuthor().size()]), matchCase, exactMatch))
             schoolSkip = true;
 
           //Final check for venues
-          if ((GeneralUtils.querySkip(qVenue, item.getBooktitle())) &&
-            (GeneralUtils.querySkip(qVenue, item.getJournal())) &&
+          if ((GeneralUtils.querySkip(qVenue, item.getBooktitle(), matchCase, exactMatch)) &&
+            (GeneralUtils.querySkip(qVenue, item.getJournal(), matchCase, exactMatch)) &&
             (schoolSkip))
             continue;
 

@@ -85,6 +85,8 @@
           <option value="<% out.print(Item.ItemTypes.MASTERSTHESIS); %>">Masters Thesis</option>
           <option value="<% out.print(Item.ItemTypes.WWW); %>">Website</option>
         </select>
+        <label>Match CaSe</label><input type="checkbox" name="matchcase" style="margin-left: 5px;" /><br />
+        <label>Exact Match</label><input type="checkbox" name="exactmatch" style="margin-left: 5px;" />
         <input type="submit" value="Search" />
       </form>
     </div>
