@@ -23,7 +23,6 @@ public class Servlet extends javax.servlet.http.HttpServlet {
   private boolean xmlParsed = false;
   
   protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-    
   }
   
   protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
@@ -34,15 +33,19 @@ public class Servlet extends javax.servlet.http.HttpServlet {
     
     //Parse XML database if we haven't done so already
     if (!xmlParsed) {
+      System.out.println("REPARSING");
+      
       //Parse XML file
       try {
         parseXML();
         xmlParsed = true;
       } catch (ParserConfigurationException | SAXException e) {}
+      
+    }
   
-      //Set attribute for items
-      HttpSession session = request.getSession();
-      session.setAttribute("itemList", items);
+    //Set attribute for items if it doesn't already exist
+    if (request.getSession().getAttribute("itemList") == null) {
+      request.getSession().setAttribute("itemList", items);
     }
   }
   

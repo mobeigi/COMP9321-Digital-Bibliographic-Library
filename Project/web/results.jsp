@@ -5,7 +5,6 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.io.PrintStream" %>
 <%@ page import="java.nio.charset.Charset" %>
-<%@ page import="dbl.ContainsIgnoreCase" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%-- Set page and invoke servlet --%>
