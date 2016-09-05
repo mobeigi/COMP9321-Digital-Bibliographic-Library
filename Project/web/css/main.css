@@ -146,7 +146,7 @@ table#cartlist .faCol {
 }
 
 input[type=button].nicebutton, input[type=submit].nicebutton {
-  width: 40%;
+  width: 20%;
   background-color: #658eca;
   color: white;
   padding: 14px 20px;

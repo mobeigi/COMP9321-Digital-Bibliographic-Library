@@ -27,16 +27,32 @@ public class Servlet extends javax.servlet.http.HttpServlet {
     String pageName = (String)request.getSession().getAttribute("page");
     
     if (pageName.equals("shoppingcart")) {
-      //Get post parameters
-      String[] qIDList = (request.getParameterValues("selectedCartItems") == null) ? null : request.getParameterValues("selectedCartItems");
-      ArrayList<Integer> cart = (ArrayList<Integer>) request.getSession().getAttribute("shoppingcart");;
+      String action = (request.getParameter("action") == null || request.getParameter("action").isEmpty()) ? null : request.getParameter("action");
+      ArrayList<Integer> cart = (ArrayList<Integer>) request.getSession().getAttribute("shoppingcart");
       
-      if (qIDList != null) {
-        //Remove various items from cart
-        for (String id : qIDList) {
-          try {
-            cart.remove(Integer.valueOf(Integer.parseInt(id) - 1)); //Remove first instance of ID
-          } catch (NumberFormatException e) {}
+      if (action != null) {
+        if (action.equals("addtocart")) {
+          String idStr = (request.getParameter("itemid") == null || request.getParameter("itemid").isEmpty()) ? null : request.getParameter("itemid");
+          if (idStr != null) {
+            try {
+              int id = Integer.parseInt(idStr);
+              cart.add(id - 1);
+            } catch (NumberFormatException e) {}
+          }
+        } else if (action.equals("removefromcart")) {
+    
+          //Get post parameters
+          String[] qIDList = (request.getParameterValues("selectedCartItems") == null) ? null : request.getParameterValues("selectedCartItems");
+    
+          if (qIDList != null) {
+            //Remove various items from cart
+            for (String id : qIDList) {
+              try {
+                cart.remove(Integer.valueOf(Integer.parseInt(id) - 1)); //Remove first instance of ID
+              } catch (NumberFormatException e) {
+              }
+            }
+          }
         }
       }
     }

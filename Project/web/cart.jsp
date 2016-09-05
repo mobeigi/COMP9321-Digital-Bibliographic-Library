@@ -75,6 +75,7 @@
         <%
         if (cartContents.size() > 0) {
         %>
+          <input type="hidden" value="removefromcart" name="action" />
           <input class="nicebutton" type="submit" value="Remove items from cart" /> <%
         }
         %></form><%

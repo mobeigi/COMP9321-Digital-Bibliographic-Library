@@ -40,8 +40,10 @@
       }
 
       ArrayList<Item> items = (ArrayList<Item>) request.getSession().getAttribute("itemList");
+      Item item = null;
+
       if (id >= 1 && id <= items.size()) {
-        Item item = items.get(id - 1);
+        item = items.get(id - 1);
     %>
     <table id="itemdetails">
       <%
@@ -290,6 +292,17 @@
         <p><strong>Error:</strong> No item exists with ID '<strong><% out.print(request.getParameter("id")); %></strong>'.</p>
         <%
         }
+      }
+
+      if (item != null) {
+        //Show add to cart button
+        %>
+        <form action="cart.jsp" method="post">
+          <input type="hidden" value="addtocart" name="action" />
+          <input type="hidden" value="<% out.print(item.getId()); %>" name="itemid" />
+          <input type="submit" class="nicebutton" value="Add to Cart" />
+        </form>
+        <%
       }
     %>
 
