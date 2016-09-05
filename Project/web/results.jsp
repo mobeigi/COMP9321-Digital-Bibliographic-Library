@@ -144,46 +144,43 @@
           //Check last for performance reasons
 
           //Author
-          if (qAuthorList.length != 0) {
-            if (item.getAuthor().size() == 0)
-              continue;
+          if (GeneralUtils.querySkipArray(qAuthorList, item.getAuthor().toArray(new String[item.getAuthor().size()])))
+            continue;
 
-            boolean skip = false;
+          //Editor
+          if (GeneralUtils.querySkipArray(qEditorList, item.getEditor().toArray(new String[item.getEditor().size()])))
+            continue;
 
-            for (String author : qAuthorList) {
-              if (!item.getAuthor().contains(author)) { //TODO: This should do a contains on string, not exact string match
-                skip = true;
-                break;
-              }
-            }
-            if (skip)
-              continue;
-          }
+          //ISBN
+          if (GeneralUtils.querySkipArray(qIsbnList, item.getIsbn().toArray(new String[item.getIsbn().size()])))
+            continue;
+
+          //Citing
+          if (GeneralUtils.querySkipArray(qCiteList, item.getCite().toArray(new String[item.getCite().size()])))
+            continue;
+
+          //EE
+          if (GeneralUtils.querySkipArray(qEeList, item.getEe().toArray(new String[item.getEe().size()])))
+            continue;
+
+          //URL
+          if (GeneralUtils.querySkipArray(qUrlList, item.getUrl().toArray(new String[item.getUrl().size()])))
+            continue;
 
           //Venue
           //Books have a field called "booktitle",
           //articles have a field called "journal",
           //thesis have a field called "school"
-          if (qVenueList.length != 0) {
-            //Get school multiple attribute
-            boolean schoolSkip = false;
-            if (item.getSchool().size() != 0) {
-              for (String venue : qVenueList) {
-                if (!item.getSchool().contains(venue)) {
-                  schoolSkip = true;
-                  break;
-                }
-              }
-            } else { //no school attribute, so skip school
-              schoolSkip = true;
-            }
+          boolean schoolSkip = false;
 
-            //Final check for venues
-            if ((item.getBooktitle() == null || !item.getBooktitle().toLowerCase().contains(qVenue.toLowerCase())) &&
-              (item.getJournal() == null || !item.getJournal().toLowerCase().contains(qVenue.toLowerCase())) &&
-              (schoolSkip))
-              continue;
-          }
+          if (GeneralUtils.querySkipArray(new String[]{qVenue}, item.getSchool().toArray(new String[item.getAuthor().size()])))
+            schoolSkip = true;
+
+          //Final check for venues
+          if ((GeneralUtils.querySkip(qVenue, item.getBooktitle())) &&
+            (GeneralUtils.querySkip(qVenue, item.getJournal())) &&
+            (schoolSkip))
+            continue;
 
           //Type
           if (qTypes != null) {
