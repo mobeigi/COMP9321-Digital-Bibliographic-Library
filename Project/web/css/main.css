@@ -114,3 +114,23 @@ table#resultslist {
 table#resultslist .faCol {
   margin-left: 10px;
 }
+
+p.result_summary {
+  margin-top: 20px;
+  color: #848484;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+div#paginationbox img {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+div#paginationbox p.pageNoOf {
+  display: inline-block;
+  line-height: 10px;
+  padding: 4px 5px 4px 5px;
+  font-family: monospace;
+  font-size: 15px;
+}
