@@ -77,10 +77,10 @@
         <select name="type" multiple id="type" size="9" title="Control click to select multiple options">
           <option disabled="disabled" style="font-weight: bold;">Publication Type:</option>
           <option value="<% out.print(Item.ItemTypes.ARTICLE); %>">Article (Journal)</option>
-          <option value="<% out.print(Item.ItemTypes.INPROCEEDINGS); %>">Proceedings (Conference)</option>
           <option value="<% out.print(Item.ItemTypes.PROCEEDINGS); %>">Proceedings (Conference)</option>
+          <option value="<% out.print(Item.ItemTypes.INPROCEEDINGS); %>">Inproceedings (Conference)</option>
           <option value="<% out.print(Item.ItemTypes.BOOK); %>">Book</option>
-          <option value="<% out.print(Item.ItemTypes.INPROCEEDINGS); %>">Incollection</option>
+          <option value="<% out.print(Item.ItemTypes.INCOLLECTION); %>">Incollection</option>
           <option value="<% out.print(Item.ItemTypes.PHDTHESIS); %>">PHD Thesis</option>
           <option value="<% out.print(Item.ItemTypes.MASTERSTHESIS); %>">Masters Thesis</option>
           <option value="<% out.print(Item.ItemTypes.WWW); %>">Website</option>
