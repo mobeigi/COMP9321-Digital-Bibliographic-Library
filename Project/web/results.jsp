@@ -72,6 +72,7 @@
         for (Item item : items) {
 
           //Check if item matches query
+          //We achieve this by skipping items that do not match each query
 
           //Title
           if (qTitle != null)
@@ -146,18 +147,9 @@
 
         //Print out results
 
-        //Search blurp
+        //Search blurp (time elapsed)
         long elapsedTime = System.nanoTime() - searchStartTime;
         double searchTime = (double)(elapsedTime) / 1000000000.0; //in seconds, nano time * 10^9
-
-
-        if (numResults > 0) { %>
-        <p>Found <strong><% out.print(NumberFormat.getInstance().format(numResults)); %></strong> results in <strong><% out.write(new DecimalFormat("0.000000").format(searchTime)); %> seconds</strong></p>
-        <%
-        } else { //No results found %>
-        <p>Sorry, no matching datasets found!</p>
-        <%
-        }
 
         //Pagination based on: http://www.tonymarston.net/php-mysql/pagination.html
         int pageNo = 1;
@@ -179,9 +171,19 @@
         if (pageNo < 1)
           pageNo = 1;
 
+        int startIndex = (pageNo - 1) * resultsPerPage;
+
+        //Print out top of results summary
+        if (numResults > 0) { %>
+        <p>Found <strong><% out.print(NumberFormat.getInstance().format(numResults)); %></strong> results in <strong><% out.write(new DecimalFormat("0.000000").format(searchTime)); %> seconds</strong></p>
+        <p class="result_summary">Showing results <strong><% out.print(startIndex + 1);%></strong> to <strong><% out.print(Math.min(startIndex + resultsPerPage, matchedItems.size())); %></strong></p>
+        <%
+        } else { //No results found %>
+        <p>Sorry, no matching datasets found!</p>
+        <%
+        }
 
         // Print matched results
-        int startIndex = (pageNo - 1) * resultsPerPage;
         for (int i = startIndex; i < Math.min(startIndex + resultsPerPage, matchedItems.size()); ++i) { //use min to ensure we cap at last item
 
           Item item = matchedItems.get(i);
@@ -208,7 +210,6 @@
           //Print pagination icons
           %>
           <div id="paginationbox">
-          <p class="result_summary">Showing results <strong><% out.print(startIndex + 1);%></strong> to <strong><% out.print(Math.min(startIndex + resultsPerPage, matchedItems.size())); %></strong></p>
           <%
           String currentFullUrl = request.getRequestURL().toString();
 

@@ -116,10 +116,13 @@ table#resultslist .faCol {
 }
 
 p.result_summary {
-  margin-top: 20px;
   color: #848484;
   font-size: 12px;
   font-family: monospace;
+}
+
+div#paginationbox {
+  margin-top: 30px;
 }
 
 div#paginationbox img {
