@@ -66,7 +66,7 @@ table#itemdetails .firstCol {
   overflow-y: auto;
 }
 
-.searchbox select, input[type=text]{
+.searchbox select, input[type=text], input[type=month] {
   width: 100%;
   padding: 12px 20px;
   margin: 4px 0;
@@ -77,8 +77,19 @@ table#itemdetails .firstCol {
   text-align: left;
 }
 
-.searchbox input[type=text]:focus  {
+.searchbox input[type=text]:focus input[type=month]:focus {
   text-align: center;
+}
+
+.searchbox input[type="month"]:before {
+  content: attr(placeholder) !important;
+  color: #aaa;
+  margin-right: 0.5em;
+}
+
+input[type="date"]:focus:before,
+input[type="date"]:valid:before {
+  content: "";
 }
 
 .searchbox .left {

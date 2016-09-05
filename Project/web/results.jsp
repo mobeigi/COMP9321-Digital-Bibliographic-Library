@@ -1,12 +1,10 @@
 <%@ page import="dbl.Item" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.awt.print.Book" %>
-<%@ page import="java.text.DecimalFormat" %>
-<%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.io.PrintStream" %>
 <%@ page import="java.nio.charset.Charset" %>
-<%@ page import="java.util.Map" %>
 <%@ page import="dbl.GeneralUtils" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.text.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%-- Set page and invoke servlet --%>
@@ -44,6 +42,8 @@
         String qTitle = (request.getParameter("title") == null || request.getParameter("title").isEmpty()) ? null : new String( request.getParameter("title").getBytes(), "UTF-8").trim();
         String qAuthor = (request.getParameter("author") == null || request.getParameter("author").isEmpty()) ? null : new String( request.getParameter("author").getBytes(), "UTF-8").trim();
         String qYear = (request.getParameter("year") == null || request.getParameter("year").isEmpty()) ? null : new String( request.getParameter("year").getBytes(), "UTF-8").trim();
+        String qFromDate = (request.getParameter("fromdate") == null || request.getParameter("fromdate").isEmpty()) ? null : new String( request.getParameter("fromdate").getBytes(), "UTF-8").trim();
+        String qToDate = (request.getParameter("todate") == null || request.getParameter("todate").isEmpty()) ? null : new String( request.getParameter("todate").getBytes(), "UTF-8").trim();
         String qVenue = (request.getParameter("venue") == null || request.getParameter("venue").isEmpty()) ? null : new String( request.getParameter("venue").getBytes(), "UTF-8").trim();
         String[] qTypes = (request.getParameterValues("type") == null) ? null : request.getParameterValues("type"); //preset doesn't need to be UTF decoded
         String qMonth = (request.getParameter("month") == null || request.getParameter("month").isEmpty()) ? null : new String( request.getParameter("month").getBytes(), "UTF-8").trim();
@@ -63,7 +63,6 @@
         String qUrl = (request.getParameter("url") == null || request.getParameter("url").isEmpty()) ? null : new String( request.getParameter("url").getBytes(), "UTF-8").trim();
         String qNotes = (request.getParameter("note") == null || request.getParameter("note").isEmpty()) ? null : new String( request.getParameter("note").getBytes(), "UTF-8").trim();
 
-        //TODO: Handle array contains (case insensitive) for author, venue
         //Handle separated multiple items
         //We also trim any whitespace around entries
         String[] qAuthorList = new String[0];
@@ -91,6 +90,84 @@
           //Title
           if (GeneralUtils.querySkip(qTitle, item.getTitle()))
             continue;
+
+          //Handle qFromDate, qToDate
+          //Only if individual month, year not specified
+          if (qMonth == null && qYear == null) {
+            String[] qFromDateList = null;
+            String[] qToDateList = null;
+
+            if (qFromDate != null)
+              qFromDateList = qFromDate.split("-");
+
+            if (qToDate != null)
+              qToDateList = qToDate.split("-");
+
+            if ((qFromDate != null && qToDate == null) || (qFromDate == null && qToDate != null)) {
+              //Only one date pair specified, treat as exact match
+              if (qFromDate != null) {
+                qYear = qFromDateList[0];
+                qMonth = new DateFormatSymbols().getMonths()[Integer.parseInt(qFromDateList[1]) - 1];
+              }
+
+              if (qToDate != null) {
+                qYear = qToDateList[0];
+                qMonth = new DateFormatSymbols().getMonths()[Integer.parseInt(qToDateList[1]) - 1];
+              }
+            } else if ((qFromDate != null && qToDate != null)) {
+              //Must perform range based search
+
+              //If year/month not specified, ignore the item
+              if (item.getYear() == null || item.getMonth() == null)
+                continue;
+
+              //qFromDate
+              //Check year
+              if (Integer.parseInt(item.getYear()) < Integer.parseInt(qFromDateList[0]))
+                continue;
+
+              //If year matches fromYear, check month
+              if (Integer.parseInt(item.getYear()) == Integer.parseInt(qFromDateList[0])) {
+                if (item.getMonth() != null) {
+                  Date date = null;
+                  try {
+                    date = new SimpleDateFormat("MMMM", Locale.ENGLISH).parse(item.getMonth());
+                  } catch (ParseException e) {
+                  }
+
+                  Calendar cal = Calendar.getInstance();
+                  cal.setTime(date);
+                  int monthInteger = cal.get(Calendar.MONTH) + 1;
+
+                  if (monthInteger < Integer.parseInt(qFromDateList[1]))
+                    continue;
+                }
+              }
+
+              //qToDate
+              //Check year
+              if (Integer.parseInt(item.getYear()) > Integer.parseInt(qToDateList[0]))
+                continue;
+
+              //If year matches fromYear, check month
+              if (Integer.parseInt(item.getYear()) == Integer.parseInt(qToDateList[0])) {
+                if (item.getMonth() != null) {
+                  Date date = null;
+                  try {
+                    date = new SimpleDateFormat("MMMM", Locale.ENGLISH).parse(item.getMonth());
+                  } catch (ParseException e) {
+                  }
+
+                  Calendar cal = Calendar.getInstance();
+                  cal.setTime(date);
+                  int monthInteger = cal.get(Calendar.MONTH) + 1;
+
+                  if (monthInteger > Integer.parseInt(qToDateList[1]))
+                    continue;
+                }
+              }
+            }
+          }
 
           //Year
           if (GeneralUtils.querySkip(qYear, item.getYear()))

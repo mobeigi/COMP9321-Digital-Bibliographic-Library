@@ -60,11 +60,6 @@ public class Servlet extends javax.servlet.http.HttpServlet {
   }
   
   protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-    
-    //Get Page request came from
-    String pageName = (String)request.getSession().getAttribute("page");
-    System.out.println(pageName);
-    
     //Parse XML database if we haven't done so already
     if (!xmlParsed) {
       
@@ -102,7 +97,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
     
       this.items = handler.getItems();
     
-      System.out.println("Parsed XML file!");
+      System.out.println("Parsed XML file! Number of publications: " + this.items.size());
       
     } catch (Throwable err) {
       err.printStackTrace();

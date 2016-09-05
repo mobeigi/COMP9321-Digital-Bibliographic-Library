@@ -32,7 +32,8 @@
       <form action="results.jsp" method="get">
         <input type="text" name="title" placeholder="Title" />
         <input type="text" name="author" placeholder="Author (comma separated)" />
-        <select name="month" class="left" style="width: 50%;">
+
+        <select name="month" class="left" style="width: 50%; padding: 10px 20px;">
           <option value="" disabled selected>Month</option>
           <option value="January">January</option>
           <option value="February">February</option>
@@ -48,6 +49,10 @@
           <option value="December">December</option>
         </select>
         <input type="text" name="year" class="right" style="width:50%; max-width: calc(50% - 8px);" maxlength="4" placeholder="Year" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+
+        <input type="month" name="fromdate" placeholder="From" class="left" style="width: 50%;"/>
+        <input type="month" name="todate" placeholder="To" class="right" style="width:50%; max-width: calc(50% - 8px);"/>
+
         <input type="text" name="venue" placeholder="Venue (semicolon separated)"/>
         <input type="text" name="editor" placeholder="Editor (comma separated)"  />
         <input type="text" name="publisher" placeholder="Publisher" />
