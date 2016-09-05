@@ -6,6 +6,7 @@
 <%@ page import="java.io.PrintStream" %>
 <%@ page import="java.nio.charset.Charset" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="dbl.GeneralUtils" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%-- Set page and invoke servlet --%>
@@ -38,35 +39,48 @@
 
         //Gather search query
         //Empty or unspecified parameters result in a null string and won't be used when reducing the set of items
-        String qTitle = (request.getParameter("title") == null || request.getParameter("title").isEmpty()) ? null : request.getParameter("title");
-        String qAuthor = (request.getParameter("author") == null || request.getParameter("author").isEmpty()) ? null : request.getParameter("author");
-        String qYear = (request.getParameter("year") == null || request.getParameter("year").isEmpty()) ? null : request.getParameter("year");
-        String qVenue = (request.getParameter("venue") == null || request.getParameter("venue").isEmpty()) ? null : request.getParameter("venue");
-        String[] qTypes = (request.getParameterValues("type") == null) ? null : request.getParameterValues("type");
-
         //We decode as UTF-8 to handle special characters coming in from browser
-        if (qTitle != null) qTitle = new String(qTitle.getBytes(), "UTF-8");
-        if (qAuthor != null) qAuthor = new String(qAuthor.getBytes(), "UTF-8");
-        if (qYear != null) qYear = new String(qYear.getBytes(), "UTF-8");
-        if (qVenue != null) qVenue = new String(qVenue.getBytes(), "UTF-8");
-
-        if (qTypes != null) {
-          for (String qType : qTypes) {
-            qType = new String(qType.getBytes(), "UTF-8");
-          }
-        }
+        //We also trim strings as surrounding whitespace does not matter
+        String qTitle = (request.getParameter("title") == null || request.getParameter("title").isEmpty()) ? null : new String( request.getParameter("title").getBytes(), "UTF-8").trim();
+        String qAuthor = (request.getParameter("author") == null || request.getParameter("author").isEmpty()) ? null : new String( request.getParameter("author").getBytes(), "UTF-8").trim();
+        String qYear = (request.getParameter("year") == null || request.getParameter("year").isEmpty()) ? null : new String( request.getParameter("year").getBytes(), "UTF-8").trim();
+        String qVenue = (request.getParameter("venue") == null || request.getParameter("venue").isEmpty()) ? null : new String( request.getParameter("venue").getBytes(), "UTF-8").trim();
+        String[] qTypes = (request.getParameterValues("type") == null) ? null : request.getParameterValues("type"); //preset doesn't need to be UTF decoded
+        String qMonth = (request.getParameter("month") == null || request.getParameter("month").isEmpty()) ? null : new String( request.getParameter("month").getBytes(), "UTF-8").trim();
+        String qEditor = (request.getParameter("editor") == null || request.getParameter("editor").isEmpty()) ? null : new String( request.getParameter("editor").getBytes(), "UTF-8").trim();
+        String qPublisher = (request.getParameter("publisher") == null || request.getParameter("publisher").isEmpty()) ? null : new String( request.getParameter("publisher").getBytes(), "UTF-8").trim();
+        String qAddress = (request.getParameter("address") == null || request.getParameter("address").isEmpty()) ? null : new String( request.getParameter("address").getBytes(), "UTF-8").trim();
+        String qPages = (request.getParameter("pages") == null || request.getParameter("pages").isEmpty()) ? null : new String( request.getParameter("pages").getBytes(), "UTF-8").trim();
+        String qChapter = (request.getParameter("chapter") == null || request.getParameter("chapter").isEmpty()) ? null : new String( request.getParameter("chapter").getBytes(), "UTF-8").trim();
+        String qVolume = (request.getParameter("volume") == null || request.getParameter("volume").isEmpty()) ? null : new String( request.getParameter("volume").getBytes(), "UTF-8").trim();
+        String qNumber = (request.getParameter("number") == null || request.getParameter("number").isEmpty()) ? null : new String( request.getParameter("number").getBytes(), "UTF-8").trim();
+        String qCrossref = (request.getParameter("crossref") == null || request.getParameter("crossref").isEmpty()) ? null : new String( request.getParameter("crossref").getBytes(), "UTF-8").trim();
+        String qSeries = (request.getParameter("series") == null || request.getParameter("series").isEmpty()) ? null : new String( request.getParameter("series").getBytes(), "UTF-8").trim();
+        String qCdrom = (request.getParameter("cdrom") == null || request.getParameter("cdrom").isEmpty()) ? null : new String( request.getParameter("cdrom").getBytes(), "UTF-8").trim();
+        String qIsbn = (request.getParameter("isbn") == null || request.getParameter("isbn").isEmpty()) ? null : new String( request.getParameter("isbn").getBytes(), "UTF-8").trim();
+        String qCite = (request.getParameter("cite") == null || request.getParameter("cite").isEmpty()) ? null : new String( request.getParameter("cite").getBytes(), "UTF-8").trim();
+        String qEe = (request.getParameter("ee") == null || request.getParameter("ee").isEmpty()) ? null : new String( request.getParameter("ee").getBytes(), "UTF-8").trim();
+        String qUrl = (request.getParameter("url") == null || request.getParameter("url").isEmpty()) ? null : new String( request.getParameter("url").getBytes(), "UTF-8").trim();
+        String qNotes = (request.getParameter("note") == null || request.getParameter("note").isEmpty()) ? null : new String( request.getParameter("note").getBytes(), "UTF-8").trim();
 
         //TODO: Handle array contains (case insensitive) for author, venue
         //Handle separated multiple items
         //We also trim any whitespace around entries
         String[] qAuthorList = new String[0];
+        String[] qEditorList = new String[0];
+        String[] qUrlList = new String[0];
+        String[] qEeList = new String[0];
+        String[] qCiteList = new String[0];
+        String[] qIsbnList = new String[0];
         String[] qVenueList = new String[0];
 
         if (qAuthor != null) qAuthorList = qAuthor.trim().split("\\s*,\\s*");
+        if (qEditor != null) qEditorList = qEditor.trim().split("\\s*,\\s*");
+        if (qUrl != null) qUrlList = qUrl.trim().split("\\s*,\\s*");
+        if (qEe != null) qEeList = qEe.trim().split("\\s*|\\s*");
+        if (qCite != null) qCiteList = qCite.trim().split("\\s*,\\s*");
+        if (qIsbn != null) qIsbnList = qIsbn.trim().split("\\s*,\\s*");
         if (qVenue != null) qVenueList = qVenue.trim().split("\\s*;\\s*");
-
-        if(qTitle != null) qTitle = qTitle.trim();
-        if(qYear != null) qYear = qYear.trim();
 
         //Iterate through items to perform our search
         for (Item item : items) {
@@ -75,9 +89,59 @@
           //We achieve this by skipping items that do not match each query
 
           //Title
-          if (qTitle != null)
-            if (item.getTitle() == null || !item.getTitle().toLowerCase().contains(qTitle.toLowerCase()))
-              continue;
+          if (GeneralUtils.querySkip(qTitle, item.getTitle()))
+            continue;
+
+          //Year
+          if (GeneralUtils.querySkip(qYear, item.getYear()))
+            continue;
+
+          //Month
+          if (GeneralUtils.querySkip(qMonth, item.getMonth()))
+            continue;
+
+          //Publisher
+          if (GeneralUtils.querySkip(qPublisher, item.getPublisher()))
+            continue;
+
+          //Address
+          if (GeneralUtils.querySkip(qAddress, item.getAddress()))
+            continue;
+
+          //Pages
+          if (GeneralUtils.querySkip(qPages, item.getPages()))
+            continue;
+
+          //Chapter
+          if (GeneralUtils.querySkip(qChapter, item.getChapter()))
+            continue;
+
+          //Volume
+          if (GeneralUtils.querySkip(qVolume, item.getVolume()))
+            continue;
+
+          //Number
+          if (GeneralUtils.querySkip(qNumber, item.getNumber()))
+            continue;
+
+          //Crossref
+          if (GeneralUtils.querySkip(qCrossref, item.getCrossref()))
+            continue;
+
+          //Series
+          if (GeneralUtils.querySkip(qSeries, item.getSeries()))
+            continue;
+
+          //Cdrom
+          if (GeneralUtils.querySkip(qCdrom, item.getCdrom()))
+            continue;
+
+          //Notes
+          if (GeneralUtils.querySkip(qNotes, item.getNote()))
+            continue;
+
+          //Now check multiple fields last
+          //Check last for performance reasons
 
           //Author
           if (qAuthorList.length != 0) {
@@ -95,11 +159,6 @@
             if (skip)
               continue;
           }
-
-          //Year
-          if (qYear != null)
-            if (item.getYear() == null || !item.getYear().equals(qYear))
-              continue;
 
           //Venue
           //Books have a field called "booktitle",
@@ -119,7 +178,7 @@
               schoolSkip = true;
             }
 
-            //Final check
+            //Final check for venues
             if ((item.getBooktitle() == null || !item.getBooktitle().toLowerCase().contains(qVenue.toLowerCase())) &&
               (item.getJournal() == null || !item.getJournal().toLowerCase().contains(qVenue.toLowerCase())) &&
               (schoolSkip))
@@ -145,9 +204,9 @@
           matchedItems.add(item);
         }
 
-        //Print out results
+        // END OF MATCHING
 
-        //Search blurp (time elapsed)
+        //Generate Search blurp (time elapsed)
         long elapsedTime = System.nanoTime() - searchStartTime;
         double searchTime = (double)(elapsedTime) / 1000000000.0; //in seconds, nano time * 10^9
 
@@ -179,7 +238,7 @@
         <p class="result_summary">Showing results <strong><% out.print(startIndex + 1);%></strong> to <strong><% out.print(Math.min(startIndex + resultsPerPage, matchedItems.size())); %></strong></p>
         <%
         } else { //No results found %>
-        <p>Sorry, no matching datasets found!</p>
+        <p>Sorry, no results found.</p>
         <%
         }
 
