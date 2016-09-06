@@ -1,6 +1,5 @@
 package dbl;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +10,7 @@ public class Item {
   private static int count = 0; //used for auto ID generation per class instance
   
   //Enums
-  public static enum ItemTypes {
+  public enum ItemTypes {
     ARTICLE,
     INPROCEEDINGS,
     PROCEEDINGS,
