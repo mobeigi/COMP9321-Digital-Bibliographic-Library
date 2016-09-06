@@ -126,8 +126,9 @@
             } else if ((qFromDate != null && qToDate != null)) {
               //Must perform range based search
 
-              //If year/month not specified, ignore the item
-              if (item.getYear() == null || item.getMonth() == null)
+              //If year not specified, ignore the item
+              //If month is not specified, this is not an issue as the match will boil down to a month check
+              if (item.getYear() == null)
                 continue;
 
               //qFromDate
