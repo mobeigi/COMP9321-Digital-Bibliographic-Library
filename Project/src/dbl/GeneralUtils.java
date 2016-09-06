@@ -1,5 +1,10 @@
 package dbl;
 
+/**
+ * GeneralUtils class with general helper functions.
+ *
+ * @author Mohammad Ghasembeigi
+ */
 public class GeneralUtils {
   /**
    * Determines if item should be skipped (because it failed to match query)
@@ -70,5 +75,31 @@ public class GeneralUtils {
     }
     
     return false;
+  }
+  
+  /**
+   * Given an publications item type returns the font awesome icon for publication.
+   *
+   * @param type  Item type of publication
+   * @return  font awesome icon name (without the fa- prefix) or empty string if no match found
+   */
+  public static String getPublicationIcon(Item.ItemTypes type) {
+    
+    if (type == Item.ItemTypes.ARTICLE) {
+      return "newspaper-o";
+    } else if (type == Item.ItemTypes.PROCEEDINGS || type == Item.ItemTypes.INPROCEEDINGS) {
+      return "file-text-o";
+    } else if (type == Item.ItemTypes.BOOK) {
+      return "book";
+    } else if (type == Item.ItemTypes.INCOLLECTION) {
+      return "users";
+    } else if (type == Item.ItemTypes.PHDTHESIS || type == Item.ItemTypes.MASTERSTHESIS) {
+      return "graduation-cap";
+    } else if (type == Item.ItemTypes.WWW) {
+      return "globe";
+    }
+  
+  
+    return "";
   }
 }

@@ -6,8 +6,12 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.*;
 
+/**
+ * Class to parse our dlb XML file
+ *
+ * @author Mohammad Ghasembeigi
+ */
 public class SaxHandler extends DefaultHandler {
-  
   
   private List<Item> items = new ArrayList<Item>();
   public List<Item> getItems() {
@@ -17,7 +21,7 @@ public class SaxHandler extends DefaultHandler {
   
   private Item curItem = null;
   
-  //Boolean attirbutes
+  //Boolean attributes
   private boolean b_author;
   private boolean b_editor;
   private boolean b_title;
@@ -262,6 +266,6 @@ public class SaxHandler extends DefaultHandler {
   public void characters(char ch[], int start, int length) throws SAXException {
   
     String value = new String(ch, start, length);
-    tmpAttribute += value;
+    tmpAttribute += value; //accumulate date in our temporary string
   }
 }

@@ -4,8 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * dbl.Item class which all DLB articles use
- * Note: Not all items will have values for every attribute
+ * Item class which all DLB publications use.
+ * Note: Not all items will have values for every attribute.
  */
 public class Item {
   private static int count = 0; //used for auto ID generation per class instance
@@ -65,7 +65,7 @@ public class Item {
     this.type = type;
   }
   
-  //Getters and Setters
+  //Getters and Setters for all fields
   public int getId() {
     return id;
   }

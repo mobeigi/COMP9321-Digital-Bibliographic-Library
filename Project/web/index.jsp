@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="dbl.Item" %>
 <%@ page import="java.util.Random" %>
+<%@ page import="dbl.GeneralUtils" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%-- Set page and invoke servlet --%>
@@ -103,7 +104,7 @@
 
               %>
               <tr>
-                <td class="faCol"><i class="fa fa-newspaper-o"></i></td>
+                <td class="faCol"><i class="fa fa-<% out.print(GeneralUtils.getPublicationIcon(item.getType())); %>"></i></td>
                 <td><a href="/itemdetails.jsp?id=<% out.print(item.getId()); %>" title="View item details"><% out.print(title); %></a></td>
               </tr>
               <%
