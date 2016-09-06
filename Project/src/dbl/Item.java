@@ -65,6 +65,36 @@ public class Item {
     this.type = type;
   }
   
+  
+  /**
+   * Provides a human readable type
+   *
+   * @param type The item type as an enum
+   * @return human readable version of type
+   */
+  public static String getTypeNiceName(Item.ItemTypes type) {
+    
+    if (type == Item.ItemTypes.ARTICLE) {
+      return "Article (Journal)";
+    } else if (type == Item.ItemTypes.PROCEEDINGS) {
+      return "Proceedings (Conference)";
+    } else if (type == Item.ItemTypes.INPROCEEDINGS) {
+      return "Inproceedings (Conference)";
+    } else if (type == Item.ItemTypes.BOOK) {
+      return "Book";
+    } else if (type == Item.ItemTypes.INCOLLECTION) {
+      return "Incollection";
+    } else if (type == Item.ItemTypes.PHDTHESIS) {
+      return "PHD Thesis";
+    } else if (type == ItemTypes.MASTERSTHESIS) {
+      return "Masters Thesis";
+    } else if (type == Item.ItemTypes.WWW) {
+      return "Website";
+    }
+    
+    return type.name();
+  }
+  
   //Getters and Setters for all fields
   public int getId() {
     return id;
