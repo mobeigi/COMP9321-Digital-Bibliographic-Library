@@ -1,5 +1,7 @@
 <%@ page import="dbl.Item" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.net.URL" %>
+<%@ page import="java.net.MalformedURLException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%-- Set page and invoke servlet --%>
@@ -174,8 +176,19 @@
       %>
       <tr>
         <td class="firstcol"><strong>URL</strong></td>
-        <td><% for (String s : item.getUrl())
-                out.print(s + "<br />"); %></td>
+        <td><% for (String s : item.getUrl()) {
+               //Check for url
+                URL url;
+                try {
+                  url = new URL(s);
+                  //No exception at this point means valid url
+                  out.print("<a href=\"" + s +"\">" + s + "</a><br />");  //print hyper link
+                } catch (MalformedURLException e) {
+                  out.print(s + "<br />"); //print regularly with no hyper link
+                }
+              }
+        %>
+        </td>
       </tr>
       <%
         }
@@ -184,8 +197,19 @@
       %>
       <tr>
         <td class="firstcol"><strong>EE</strong></td>
-        <td><% for (String s : item.getEe())
-                out.print(s + "<br />"); %></td>
+        <td><% for (String s : item.getEe()) {
+          //Check for url
+          URL url;
+          try {
+            url = new URL(s);
+            //No exception at this point means valid url
+            out.print("<a href=\"" + s +"\">" + s + "</a><br />");  //print hyper link
+          } catch (MalformedURLException e) {
+            out.print(s + "<br />"); //print regularly with no hyper link
+          }
+        }
+        %>
+        </td>
       </tr>
       <%
         }
