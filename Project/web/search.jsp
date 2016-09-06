@@ -1,11 +1,4 @@
 <%@ page import="dbl.Item" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.awt.print.Book" %>
-<%@ page import="java.text.DecimalFormat" %>
-<%@ page import="java.text.NumberFormat" %>
-<%@ page import="java.io.PrintStream" %>
-<%@ page import="java.nio.charset.Charset" %>
-<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%-- Set page and invoke servlet --%>

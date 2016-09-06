@@ -1,5 +1,3 @@
-<%@ page import="org.omg.CORBA.Request" %>
-<%@ page import="java.lang.reflect.Array" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="dbl.Item" %>
 <%@ page import="java.util.Random" %>
@@ -26,7 +24,7 @@
     <div class="caption">
       <h6>Over 1000 new publications added daily!</h6>
       <h1>Powerful <span>Search</span></h1>
-      <a class="btn btn-transparent" href="/search.jsp">Search Now</a>
+      <a class="btn btn-transparent" href="search.jsp">Search Now</a>
     </div>
   </div>
   <div class="item" style="background-image: url(images/sliders/Slide2.jpg)">
@@ -75,7 +73,7 @@
             <option value="<% out.print(Item.ItemTypes.WWW); %>">Website</option>
           </select>
           <br />
-          <a href="/search.jsp" title="Use Advanced Search" style="float: right;">Advanced Search</a>
+          <a href="search.jsp" title="Use Advanced Search" style="float: right;">Advanced Search</a>
           <input type="submit" value="Search" />
         </form>
         </div>
@@ -105,7 +103,7 @@
               %>
               <tr>
                 <td class="faCol"><i class="fa fa-<% out.print(GeneralUtils.getPublicationIcon(item.getType())); %>"></i></td>
-                <td><a href="/itemdetails.jsp?id=<% out.print(item.getId()); %>" title="View item details"><% out.print(title); %></a></td>
+                <td><a href="itemdetails.jsp?id=<% out.print(item.getId()); %>" title="View item details"><% out.print(title); %></a></td>
               </tr>
               <%
             }

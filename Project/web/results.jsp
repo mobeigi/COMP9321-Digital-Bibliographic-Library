@@ -1,7 +1,4 @@
 <%@ page import="dbl.Item" %>
-<%@ page import="java.awt.print.Book" %>
-<%@ page import="java.io.PrintStream" %>
-<%@ page import="java.nio.charset.Charset" %>
 <%@ page import="dbl.GeneralUtils" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
@@ -343,7 +340,7 @@
       %>
       <tr>
         <td class="faCol"><i class="fa fa-<% out.print(GeneralUtils.getPublicationIcon(item.getType())); %>"></i></td>
-        <td><a href="/itemdetails.jsp?id=<% out.print(item.getId()); %>" title="View item details"><% out.print(title); %></a></td>
+        <td><a href="itemdetails.jsp?id=<% out.print(item.getId()); %>" title="View item details"><% out.print(title); %></a></td>
       </tr>
       <%
         }
@@ -384,12 +381,12 @@
 
           if (pageNo == 1) {
           %>
-          <img style="vertical-align:middle;" src="/images/results/resultset_first_gray.png" title="First Page">
-          <img style="vertical-align:middle;" src="/images/results/resultset_previous_gray.png" title="Previous Page">
+          <img style="vertical-align:middle;" src="images/results/resultset_first_gray.png" title="First Page">
+          <img style="vertical-align:middle;" src="images/results/resultset_previous_gray.png" title="Previous Page">
           <%
             } else { %>
-          <a href="<% out.print(currentFullUrl + "&pageNo=1");%>"><img style="vertical-align:middle;" src="/images/results/resultset_first.png" title="First Page"></a>
-          <a href="<% out.print(currentFullUrl + "&pageNo=" + (pageNo - 1));%>"><img style="vertical-align:middle;" src="/images/results/resultset_previous.png" title="Previous Page"></a>
+          <a href="<% out.print(currentFullUrl + "&pageNo=1");%>"><img style="vertical-align:middle;" src="images/results/resultset_first.png" title="First Page"></a>
+          <a href="<% out.print(currentFullUrl + "&pageNo=" + (pageNo - 1));%>"><img style="vertical-align:middle;" src="images/results/resultset_previous.png" title="Previous Page"></a>
           <%
             }
 
@@ -397,12 +394,12 @@
 
             if (pageNo == lastPage) {
           %>
-          <img style="vertical-align:middle;" src="/images/results/resultset_next_gray.png" title="Next Page">
-          <img style="vertical-align:middle;" src="/images/results/resultset_last_gray.png" title="Last Page">
+          <img style="vertical-align:middle;" src="images/results/resultset_next_gray.png" title="Next Page">
+          <img style="vertical-align:middle;" src="images/results/resultset_last_gray.png" title="Last Page">
           <%
           } else { %>
-          <a href="<% out.print(currentFullUrl + "&pageNo=" + (pageNo + 1));%>"><img style="vertical-align:middle;" src="/images/results/resultset_next.png" title="Next Page"></a>
-          <a href="<% out.print(currentFullUrl + "&pageNo=" + lastPage);%>"><img style="vertical-align:middle;" src="/images/results/resultset_last.png" title="Last Page"></a>
+          <a href="<% out.print(currentFullUrl + "&pageNo=" + (pageNo + 1));%>"><img style="vertical-align:middle;" src="images/results/resultset_next.png" title="Next Page"></a>
+          <a href="<% out.print(currentFullUrl + "&pageNo=" + lastPage);%>"><img style="vertical-align:middle;" src="images/results/resultset_last.png" title="Last Page"></a>
           <%
             }
           %>

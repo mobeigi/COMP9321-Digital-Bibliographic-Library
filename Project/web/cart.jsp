@@ -1,11 +1,5 @@
 <%@ page import="dbl.Item" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.awt.print.Book" %>
-<%@ page import="java.text.DecimalFormat" %>
-<%@ page import="java.text.NumberFormat" %>
-<%@ page import="java.io.PrintStream" %>
-<%@ page import="java.nio.charset.Charset" %>
-<%@ page import="java.util.Map" %>
 <%@ page import="dbl.GeneralUtils" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -104,7 +98,7 @@
       %>
       <tr>
         <td class="faCol"><i class="fa fa-<% out.print(GeneralUtils.getPublicationIcon(item.getType())); %>"></i></td>
-        <td><a href="/itemdetails.jsp?id=<% out.print(item.getId()); %>" title="View item details"><% out.print(title); %></a></td>
+        <td><a href="itemdetails.jsp?id=<% out.print(item.getId()); %>" title="View item details"><% out.print(title); %></a></td>
         <td style="text-align: center;"><input type="checkbox" name="selectedCartItems" value="<% out.print(item.getId()); %>" title="Check to mark this item for removal" onchange="resetError();"/></td>
       </tr>
       <%
@@ -113,7 +107,7 @@
         %>
       </table>
        <p id="errorbox"></p>
-       <a href="/search.jsp"><input class="nicebutton" type="button" value="Return to search" /></a>
+       <a href="search.jsp"><input class="nicebutton" type="button" value="Return to search" /></a>
         <%
         if (cartContents.size() > 0) {
         %>
